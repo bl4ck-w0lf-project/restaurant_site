@@ -336,7 +336,7 @@ const Navbar: React.FC = () => {
                         {/* Zone 3: Recherche + Panier + Réserver (Desktop) */}
                         <div className="hidden lg:flex lg:items-center lg:space-x-3">
                             <button
-                                className="relative p-2 text-[#FE652D] hover:text-[#FE652D] transition-all duration-300 rounded-full hover:bg-white/5 group"
+                                className="relative p-2 text-gray-700 hover:text-[#FE652D] transition-all duration-300 rounded-full hover:bg-white/5 group"
                                 aria-label="Rechercher"
                             >
                                 <IoSearchSharp className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
@@ -344,7 +344,7 @@ const Navbar: React.FC = () => {
                             </button>
 
                             <button
-                                className="relative p-2 text-[#FE652D] hover:text-[#FE652D] transition-all duration-300 rounded-full hover:bg-white/5 group"
+                                className="relative p-2 text-gray-700 hover:text-[#FE652D] transition-all duration-300 rounded-full hover:bg-white/5 group"
                                 aria-label="Voir le panier"
                             >
                                 <FaShoppingCart className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
