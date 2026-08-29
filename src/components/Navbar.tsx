@@ -138,7 +138,7 @@ const Navbar: React.FC = () => {
             `}</style>
 
             {/* ✅ NAVBAR FIXE AVEC TRANSITION DE BACKGROUND AU SCROLL */}
-            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-white/30 backdrop-blur-sm shadow-sm py-3' : 'bg-transparent py-5'}`}>
+            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-transparent backdrop-blur-sm shadow-sm py-3' : 'bg-transparent py-5'}`}>
                 <nav className="container mx-auto px-4 sm:px-6 lg:px-8 hidden lg:block" aria-label="Navigation principale">
                     <div className="flex items-center justify-between">
                         <div className="flex-shrink-0">

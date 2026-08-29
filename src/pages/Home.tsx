@@ -85,9 +85,9 @@ const OrbitalHero = () => {
                   tint="#FFD8C8"
                   mode="both"
                   direction="right"
-                  echoes={6}
+                  echoes={4}
                   lag={0.3}
-                  offset={56}
+                  offset={20}
                   fontSize="inherit"
                   className="italic"
                 />
@@ -461,48 +461,7 @@ const ContactSection = () => (
   </section>
 );
 
-// ==========================================
-// FOOTER
-// ==========================================
-const Footer = () => (
-  <footer className="bg-stone-900 text-stone-400 py-16 border-t border-stone-800">
-    <div className="container mx-auto px-6">
-      <div className="grid md:grid-cols-4 gap-12 mb-12">
-        <div className="md:col-span-1">
-          <h3 className="text-2xl font-serif text-white mb-4">L'Art Culinaire</h3>
-          <p className="text-sm leading-relaxed mb-6">Une expérience gastronomique contemporaine où la passion du goût rencontre l'élégance du service.</p>
-        </div>
-        <div>
-          <h4 className="text-white font-medium mb-4">Navigation</h4>
-          <ul className="space-y-2 text-sm">
-            <li><a href="/" className="hover:text-[#FE652D] transition-colors">Accueil</a></li>
-            <li><a href="/about" className="hover:text-[#FE652D] transition-colors">À propos</a></li>
-            <li><a href="/menu" className="hover:text-[#FE652D] transition-colors">La Carte</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-white font-medium mb-4">Légal</h4>
-          <ul className="space-y-2 text-sm">
-            <li><a href="#" className="hover:text-[#FE652D] transition-colors">Mentions légales</a></li>
-            <li><a href="#" className="hover:text-[#FE652D] transition-colors">CGV</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-white font-medium mb-4">Newsletter</h4>
-          <div className="flex">
-            <input type="email" placeholder="Votre email" className="bg-stone-800 border-none text-white px-4 py-2 rounded-l-xl w-full focus:ring-1 focus:ring-[#FE652D] outline-none text-sm" />
-            <button className="bg-[#FE652D] text-white px-4 py-2 rounded-r-xl hover:bg-[#e55a25] transition-colors">
-              <ArrowRight size={18} />
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="border-t border-stone-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs">
-        <p>&copy; {new Date().getFullYear()} L'Art Culinaire. Tous droits réservés.</p>
-      </div>
-    </div>
-  </footer>
-);
+
 
 // ==========================================
 // COMPOSANT PRINCIPAL
@@ -510,13 +469,12 @@ const Footer = () => (
 export default function Home() {
   return (
     <main className="bg-[#FDFBF7] text-stone-900 font-sans antialiased selection:bg-[#FE652D] selection:text-white">
-      <Navbar />
+
       <OrbitalHero />
       <AboutSection />
       <MenuSection />
       <ReservationSection />
       <ContactSection />
-      <Footer />
     </main>
   );
 }
