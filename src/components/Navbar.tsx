@@ -8,6 +8,7 @@ import StaggeredMenu from './StaggeredMenu';
 
 const Navbar: React.FC = () => {
     const location = useLocation();
+    const [isScrolled, setIsScrolled] = useState(false);
 
     // Refs pour l'effet Gooey (Desktop uniquement)
     const navRef = useRef<HTMLUListElement>(null);
@@ -24,7 +25,6 @@ const Navbar: React.FC = () => {
         { name: 'Contact', path: '/contact' },
     ];
 
-    // ✅ LES LIENS SONT DÉFINIS ICI ET PASSÉS AU STAGGERED MENU
     const menuItems = [
         { label: 'Accueil', ariaLabel: 'Aller à la page d’accueil', link: '/' },
         { label: 'À propos', ariaLabel: 'Découvrir notre restaurant', link: '/about' },
@@ -32,6 +32,15 @@ const Navbar: React.FC = () => {
         { label: 'Réservation', ariaLabel: 'Réserver une table', link: '/reservation' },
         { label: 'Contact', ariaLabel: 'Nous contacter', link: '/contact' }
     ];
+
+    // Détection du scroll pour changer le style de la navbar
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 50);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     // Effet Gooey pour les liens desktop
     useEffect(() => {
@@ -128,24 +137,22 @@ const Navbar: React.FC = () => {
                 .group:hover .icon-dot { opacity: 1; transform: translateX(-50%) scale(1); }
             `}</style>
 
-            <header className="absolute top-0 left-0 right-0 z-50 bg-transparent">
-                {/* ========================================== */}
-                {/* NAVBAR DESKTOP (Strictement conservée)     */}
-                {/* ========================================== */}
+            {/* ✅ NAVBAR FIXE AVEC TRANSITION DE BACKGROUND AU SCROLL */}
+            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-white/20 backdrop-blur-sm shadow-sm py-3' : 'bg-transparent py-5'}`}>
                 <nav className="container mx-auto px-4 sm:px-6 lg:px-8 hidden lg:block" aria-label="Navigation principale">
-                    <div className="flex items-center justify-between h-24 lg:h-28">
+                    <div className="flex items-center justify-between">
                         <div className="flex-shrink-0">
                             <Link to="/" className="block" aria-label="Page d'accueil">
-                                <img src={logo} alt="Logo du restaurant" className="h-16 w-auto md:h-20 lg:h-24 object-contain" />
+                                <img src={logo} alt="Logo du restaurant" className={`h-14 w-auto object-contain transition-all duration-300 ${isScrolled ? 'h-12' : 'h-16'}`} />
                             </Link>
                         </div>
 
                         <div className="flex items-center justify-center flex-1">
                             <div className="relative" ref={containerRef}>
-                                <ul ref={navRef} className="flex items-center space-x-8 xl:space-x-10 list-none m-0 p-0 relative z-[3]" style={{ color: 'white', textShadow: '0 px 1px hsl(205deg 30% 10% / 0.2)' }}>
+                                <ul ref={navRef} className="flex items-center space-x-8 xl:space-x-10 list-none m-0 p-0 relative z-[3]">
                                     {navLinks.map((link) => (
                                         <li key={link.name} className="relative cursor-pointer transition-all duration-300 nav-link-hover" onMouseEnter={handleLinkHover}>
-                                            <Link to={link.path} className={`relative py-2 text-sm xl:text-base font-medium text-gray-700 transition-all duration-300 hover:text-[#FE652D] ${isActive(link.path) ? 'nav-link-active' : ''}`} aria-current={isActive(link.path) ? 'page' : undefined}>
+                                            <Link to={link.path} className={`relative py-2 text-sm xl:text-base font-medium text-stone-800 transition-all duration-300 hover:text-[#FE652D] ${isActive(link.path) ? 'nav-link-active' : ''}`} aria-current={isActive(link.path) ? 'page' : undefined}>
                                                 {link.name}
                                                 <span className="nav-dot" />
                                             </Link>
@@ -157,11 +164,11 @@ const Navbar: React.FC = () => {
                         </div>
 
                         <div className="flex items-center space-x-3">
-                            <button className="relative p-2 text-gray-700 hover:text-[#FE652D] transition-all duration-300 rounded-full hover:bg-white/5 group" aria-label="Rechercher">
+                            <button className="relative p-2 text-stone-800 hover:text-[#FE652D] transition-all duration-300 rounded-full hover:bg-stone-100 group" aria-label="Rechercher">
                                 <IoSearchSharp className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
                                 <span className="icon-dot" />
                             </button>
-                            <button className="relative p-2 text-gray-700 hover:text-[#FE652D] transition-all duration-300 rounded-full hover:bg-white/5 group" aria-label="Voir le panier">
+                            <button className="relative p-2 text-stone-800 hover:text-[#FE652D] transition-all duration-300 rounded-full hover:bg-stone-100 group" aria-label="Voir le panier">
                                 <FaShoppingCart className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
                                 <span className="icon-dot" />
                             </button>
@@ -174,18 +181,16 @@ const Navbar: React.FC = () => {
                     </div>
                 </nav>
 
-                {/* ========================================== */}
-                {/* MENU MOBILE (StaggeredMenu)                */}
-                {/* ========================================== */}
+                {/* MENU MOBILE (StaggeredMenu) */}
                 <div className="lg:hidden">
                     <StaggeredMenu
                         position="right"
-                        colors={['#FE652D', '#ff8a5c', '#ffffff']} // ✅ Le rideau sera orange dégradé
+                        colors={['#FE652D', '#ff8a5c', '#ffffff']}
                         items={menuItems}
                         displaySocials={false}
                         displayItemNumbering={true}
                         logoUrl={logo}
-                        menuButtonColor="#FE652D"
+                        menuButtonColor={isScrolled ? "#FE652D" : "#FE652D"}
                         openMenuButtonColor="#FE652D"
                         accentColor="#FE652D"
                         isFixed={true}

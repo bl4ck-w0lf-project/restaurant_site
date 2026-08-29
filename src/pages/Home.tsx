@@ -1,15 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
   ChefHat, Wine, UtensilsCrossed, MapPin, Phone, Mail,
-  Clock, ArrowRight, Star, Award, Users, Fish, Coffee, Pizza
+  Clock, ArrowRight, Star, Award, Fish, Coffee, Pizza,
+  Soup, Cake, GlassWater, Martini, Table
 } from 'lucide-react';
 import { FaInstagram, FaFacebook } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 import EchoText from '../components/EchoText';
 
 // ==========================================
-// DONNÉES - PLATS AVEC VRAIES PHOTOS
+// DONNÉES
 // ==========================================
 const ORBITAL_DISHES = [
   { id: 1, name: "Filet de Bœuf", desc: "Sauce truffe noire, purée de céleri", img: "https://images.unsplash.com/photo-1546241072-48010ad2862c?auto=format&fit=crop&q=80&w=600" },
@@ -29,10 +30,6 @@ const BENTO_MENU = [
   { id: 6, title: "Poulpe Grillé", category: "Plat", price: "38€", img: "https://images.unsplash.com/photo-1534685784101-03a1af4d5f22?auto=format&fit=crop&q=80&w=800", size: "medium" },
 ];
 
-// ==========================================
-// COMPOSANTS
-// ==========================================
-
 const SectionTitle = ({ children, subtitle }: { children: React.ReactNode, subtitle?: string }) => (
   <div className="mb-12 text-center">
     {subtitle && <span className="text-[#FE652D] font-medium tracking-[0.3em] text-sm uppercase mb-4 block">{subtitle}</span>}
@@ -42,14 +39,13 @@ const SectionTitle = ({ children, subtitle }: { children: React.ReactNode, subti
 );
 
 // ==========================================
-// HERO - ORBITAL COMPOSITION (MODIFIÉE)
+// HERO
 // ==========================================
 const OrbitalHero = () => {
   const [activeId, setActiveId] = useState(1);
   const [rotation, setRotation] = useState(0);
   const activeDish = ORBITAL_DISHES.find(d => d.id === activeId) || ORBITAL_DISHES[0];
 
-  // Rotation automatique lente
   useEffect(() => {
     const interval = setInterval(() => {
       setRotation(prev => (prev + 0.15) % 360);
@@ -64,12 +60,17 @@ const OrbitalHero = () => {
   const orbitalDishes = ORBITAL_DISHES.filter(d => d.id !== activeId);
 
   return (
-    <section className="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden bg-[#FDFBF7]">
-      {/* ===== BACKGROUND PATTERN ===== */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
-        <div className="absolute top-20 left-10 rotate-12"><UtensilsCrossed size={120} strokeWidth={1} /></div>
-        <div className="absolute bottom-40 right-20 -rotate-12"><Wine size={100} strokeWidth={1} /></div>
-        <div className="absolute top-1/2 left-1/4 rotate-45"><ChefHat size={80} strokeWidth={1} /></div>
+    <section className="relative min-h-screen flex items-center pt-32 pb-12 overflow-hidden bg-gradient-to-b from-white via-[#FDFBF7] to-[#FDFBF7]">
+      
+      {/* ===== BACKGROUND DÉTAILS CULINAIRES (OPACITÉ 0.5) ===== */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-20 left-10 rotate-12 text-stone-300 opacity-50"><UtensilsCrossed size={140} strokeWidth={1} /></div>
+        <div className="absolute bottom-40 right-20 -rotate-12 text-stone-300 opacity-50"><Wine size={120} strokeWidth={1} /></div>
+        <div className="absolute top-1/3 left-1/4 rotate-45 text-stone-300 opacity-50"><ChefHat size={100} strokeWidth={1} /></div>
+        <div className="absolute top-20 right-1/3 -rotate-12 text-stone-300 opacity-50"><Fish size={90} strokeWidth={1} /></div>
+        <div className="absolute bottom-1/3 left-1/5 rotate-12 text-stone-300 opacity-50"><Coffee size={80} strokeWidth={1} /></div>
+        <div className="absolute top-1/2 right-10 rotate-45 text-stone-300 opacity-50"><Martini size={110} strokeWidth={1} /></div>
+        <div className="absolute bottom-20 left-1/3 -rotate-12 text-stone-300 opacity-50"><Cake size={85} strokeWidth={1} /></div>
       </div>
 
       {/* ===== LIGNE DIAGONALE ===== */}
@@ -82,31 +83,30 @@ const OrbitalHero = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
 
-          {/* ===== PARTIE GAUCHE : ÉDITORIAL AVEC ECHO TEXT ===== */}
+          {/* ===== PARTIE GAUCHE : ÉDITORIAL ===== */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex-1 text-center lg:text-left"
           >
-            <div className="inline-block mb-6 px-4 py-1.5 border border-[#FE652D]/20 rounded-full">
+            <div className="inline-block mb-6 px-4 py-1.5 border border-[#FE652D]/20 rounded-full bg-white/50 backdrop-blur-sm">
               <span className="text-[#FE652D] text-xs font-medium tracking-[0.3em] uppercase">Gastronomie étoilée</span>
             </div>
 
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-stone-900 leading-[0.95] mb-8">
-              L'ART DE LA
-             <br />
+              L'ART DE LA <br />
               <span className="inline-block mt-2">
                 <EchoText
                   text="PASSION"
                   color="#FE652D"
-                  tint="#FFD8C8" // Orange très clair pour l'effet d'écho
+                  tint="#FFD8C8"
                   mode="both"
-                  direction="diagonal" // Effet dynamique et élégant
-                  echoes={6} // Nombre d'échos (subtil)
+                  direction="diagonal"
+                  echoes={6}
                   lag={0.3}
-                  offset={56} // Distance de l'écho
-                  fontSize="inherit" // S'adapte à la taille du h1
+                  offset={56}
+                  fontSize="inherit"
                   className="italic"
                 />
               </span>
@@ -147,37 +147,36 @@ const OrbitalHero = () => {
             </div>
           </motion.div>
 
-          {/* ===== PARTIE DROITE : ORBITAL INTERACTIF (CADRES CARRÉS) ===== */}
+          {/* ===== PARTIE DROITE : ORBITAL INTERACTIF ===== */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
             className="flex-1 relative w-full max-w-2xl aspect-square flex items-center justify-center"
           >
-            {/* Orbites décoratives */}
             <div className="absolute inset-0 border border-stone-200/30 rounded-full scale-[0.95] opacity-50" />
             <div className="absolute inset-0 border border-dashed border-stone-300/40 rounded-full scale-[0.75] opacity-60 animate-[spin_80s_linear_infinite]" />
 
-            {/* ===== PLAT CENTRAL (CADRE CARRÉ + TEXTE SÉPARÉ) ===== */}
+            {/* ===== PLAT CENTRAL AVEC CADRE DE TEXTE SÉPARÉ ===== */}
             <motion.div
               key={`center-${activeId}`}
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="relative z-20 w-72 h-72 md:w-96 md:h-96 rounded-2xl overflow-hidden shadow-2xl shadow-stone-900/20 cursor-default group"
+              className="relative z-20 w-72 h-72 md:w-96 md:h-96 rounded-2xl overflow-hidden shadow-2xl shadow-stone-900/10 cursor-default group"
             >
               <img src={activeDish.img} alt={activeDish.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               
-              {/* CADRE DE TEXTE SÉPARÉ EN BAS DE L'IMAGE */}
-              <div className="absolute bottom-0 left-0 right-0 p-5 bg-stone-900/80 backdrop-blur-md border-t border-white/10">
-                <h3 className="text-white font-serif text-2xl leading-none">{activeDish.name}</h3>
-                <p className="text-stone-300 text-sm mt-2 font-light">{activeDish.desc}</p>
+              {/* CADRE DE TEXTE SÉPARÉ (Glassmorphism) */}
+              <div className="absolute bottom-4 left-4 right-4 p-4 bg-white/90 backdrop-blur-md rounded-xl border border-white/50 shadow-lg">
+                <h3 className="text-stone-900 font-serif text-xl md:text-2xl leading-none">{activeDish.name}</h3>
+                <p className="text-stone-600 text-sm mt-2 font-light">{activeDish.desc}</p>
               </div>
             </motion.div>
 
-            {/* ===== PLATS ORBITAUX (CADRES CARRÉS) ===== */}
+            {/* ===== PLATS ORBITAUX ===== */}
             {orbitalDishes.map((dish, index) => {
-              const orbitRadius = 320; // Rayon ajusté pour les carrés
+              const orbitRadius = 320;
               const angle = (index / orbitalDishes.length) * 2 * Math.PI + (rotation * Math.PI / 180);
               const x = Math.cos(angle) * orbitRadius;
               const y = Math.sin(angle) * orbitRadius;
@@ -189,7 +188,7 @@ const OrbitalHero = () => {
                   animate={{ x, y, scale: 0.65, opacity: 0.9 }}
                   whileHover={{ scale: 0.8, opacity: 1, zIndex: 30 }}
                   onClick={() => handleDishClick(dish.id)}
-                  className="absolute w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden shadow-xl cursor-pointer z-10 border-2 border-white"
+                  className="absolute w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden shadow-xl cursor-pointer z-10 border-2 border-white/80"
                 >
                   <img src={dish.img} alt={dish.name} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-black/10 hover:bg-black/0 transition-all duration-300" />
@@ -224,7 +223,7 @@ const AboutSection = () => (
             className="w-full h-[500px] object-cover rounded-2xl shadow-xl"
           />
           <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-[#FE652D]" />
-          <div className="absolute -bottom-6 -left-6 bg-white shadow-xl rounded-xl p-4 flex items-center gap-3">
+          <div className="absolute -bottom-6 -left-6 bg-white shadow-xl rounded-xl p-4 flex items-center gap-3 border border-stone-100">
             <div className="w-12 h-12 rounded-full bg-[#FE652D]/10 flex items-center justify-center">
               <Award className="w-6 h-6 text-[#FE652D]" />
             </div>
