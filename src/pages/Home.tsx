@@ -8,15 +8,16 @@ import {
 import { FaInstagram, FaFacebook } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 import EchoText from '../components/EchoText';
+import MagicBento from '../components/MagicBento';
 
 // ==========================================
 // DONNÉES
 // ==========================================
 const ORBITAL_DISHES = [
-  { id: 1, name: "Filet de Bœuf", desc: "Sauce truffe noire, purée de céleri", img: "https://images.unsplash.com/photo-1546241072-48010ad2862c?auto=format&fit=crop&q=80&w=600" },
-  { id: 2, name: "Saint-Jacques", desc: "Émulsion de chou-fleur, noisettes torréfiées", img: "https://images.unsplash.com/photo-1599084993091-1cb5c0721cc6?auto=format&fit=crop&q=80&w=600" },
+  { id: 1, name: "Filet de Bœuf", desc: "Sauce truffe noire, purée de céleri", img: "https://purepng.com/public/uploads/large/purepng.com-hamburgerburger-food-tasty-bread-eat-delicious-hamburger-junk-941524599154ppmkn.png" },
+  { id: 2, name: "Saint-Jacques", desc: "Émulsion de chou-fleur, noisettes torréfiées", img: "https://pngimg.com/uploads/steak/small/steak_PNG86.png" },
   { id: 3, name: "Risotto aux Cèpes", desc: "Parmesan 24 mois, huile de truffe", img: "https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format&fit=crop&q=80&w=600" },
-  { id: 4, name: "Dessert Signature", desc: "Chocolat grand cru, framboise, croustillant", img: "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&q=80&w=600" },
+  { id: 4, name: "Dessert Signature", desc: "Chocolat grand cru, framboise, croustillant", img: "https://pngimg.com/uploads/steak/small/steak_PNG86.png" },
   { id: 5, name: "Homard Bleu", desc: "Beurre blanc, légumes de saison", img: "https://images.unsplash.com/photo-1551248429-40975aa4de74?auto=format&fit=crop&q=80&w=600" },
   { id: 6, name: "Agneau de Lait", desc: "Gratin dauphinois, thym", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=600" },
 ];
@@ -61,7 +62,7 @@ const OrbitalHero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center pt-32 pb-12 overflow-hidden bg-gradient-to-b from-white via-[#FDFBF7] to-[#FDFBF7]">
-      
+
       {/* ===== BACKGROUND DÉTAILS CULINAIRES (OPACITÉ 0.5) ===== */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-20 left-10 rotate-12 text-stone-300 opacity-50"><UtensilsCrossed size={140} strokeWidth={1} /></div>
@@ -163,12 +164,12 @@ const OrbitalHero = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="relative z-20 w-72 h-72 md:w-96 md:h-96 rounded-2xl overflow-hidden shadow-2xl shadow-stone-900/10 cursor-default group"
+              className="relative z-20 overflow-hidden  cursor-default group"
             >
               <img src={activeDish.img} alt={activeDish.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              
+
               {/* CADRE DE TEXTE SÉPARÉ (Glassmorphism) */}
-              <div className="absolute bottom-4 left-4 right-4 p-4 bg-white/90 backdrop-blur-md rounded-xl border border-white/50 shadow-lg">
+              <div className="absolute bottom-1 w-50 left-4 right-4 p-4 bg-white/90 backdrop-blur-md rounded-xl border border-white/50 shadow-lg">
                 <h3 className="text-stone-900 font-serif text-xl md:text-2xl leading-none">{activeDish.name}</h3>
                 <p className="text-stone-600 text-sm mt-2 font-light">{activeDish.desc}</p>
               </div>
@@ -176,7 +177,7 @@ const OrbitalHero = () => {
 
             {/* ===== PLATS ORBITAUX ===== */}
             {orbitalDishes.map((dish, index) => {
-              const orbitRadius = 320;
+              const orbitRadius = 350;
               const angle = (index / orbitalDishes.length) * 2 * Math.PI + (rotation * Math.PI / 180);
               const x = Math.cos(angle) * orbitRadius;
               const y = Math.sin(angle) * orbitRadius;
@@ -260,46 +261,34 @@ const AboutSection = () => (
 // ==========================================
 // BENTO MENU SECTION
 // ==========================================
-const BentoMenu = () => (
-  <section className="py-24 bg-[#FDFBF7]">
+const MenuSection = () => (
+  <section className="py-24 bg-[#FDFBF7] bento-section-wrapper">
     <div className="container mx-auto px-6">
       <SectionTitle subtitle="Nos Créations">La Carte</SectionTitle>
-      <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-auto md:grid-rows-4 gap-4 md:h-[700px]">
-        {BENTO_MENU.map((item, index) => {
-          const sizeClasses = {
-            large: "md:col-span-2 md:row-span-2",
-            small: "md:col-span-1 md:row-span-1",
-            medium: "md:col-span-2 md:row-span-1",
-            tall: "md:col-span-1 md:row-span-2",
-          }[item.size] || "md:col-span-1 md:row-span-1";
 
-          return (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className={`group relative overflow-hidden rounded-2xl cursor-pointer ${sizeClasses}`}
-            >
-              <img src={item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
-              <div className="absolute bottom-0 left-0 p-6 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                <span className="text-[#FE652D] text-xs font-bold tracking-[0.2em] uppercase mb-1 block">{item.category}</span>
-                <h3 className="text-white font-serif text-xl md:text-2xl mb-1">{item.title}</h3>
-                <div className="flex items-center justify-between">
-                  <span className="text-stone-300 font-medium">{item.price}</span>
-                  <div className="w-8 h-8 rounded-full bg-[#FE652D] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                    <ArrowRight size={16} className="text-white" />
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          );
-        })}
+      {/* ✅ COMPOSANT MAGIC BENTO CONFIGURÉ EN ORANGE */}
+      <div className="flex justify-center">
+        <MagicBento
+          textAutoHide={true}
+          enableStars={true}          // Garde les particules, c'est stylé
+          enableSpotlight={true}      // Garde le halo de lumière
+          enableBorderGlow={true}     // Lueur orange sur les bordures au survol
+          enableTilt={true}          // Désactivé pour un rendu plus "propre" et stable
+          enableMagnetism={false}
+          clickEffect={true}          // Effet d'onde au clic
+          spotlightRadius={800}
+          particleCount={20}           // Un peu moins de particules pour rester élégant
+          glowColor="254, 101, 45"    // ✅ COULEUR ORANGE #FE652D EN RGB
+          disableAnimations={false}
+        />
       </div>
+
       <div className="text-center mt-12">
-        <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="border-2 border-stone-900 text-stone-900 px-10 py-3 rounded-xl font-medium tracking-wide hover:bg-stone-900 hover:text-white transition-all duration-300">
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="border-2 border-stone-900 text-stone-900 px-10 py-3 rounded-xl font-medium tracking-wide hover:bg-stone-900 hover:text-white transition-all duration-300"
+        >
           Voir la carte complète
         </motion.button>
       </div>
@@ -434,7 +423,7 @@ export default function Home() {
       <Navbar />
       <OrbitalHero />
       <AboutSection />
-      <BentoMenu />
+      <MagicBento />
       <ReservationSection />
       <ContactSection />
       <Footer />
