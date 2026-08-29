@@ -138,7 +138,7 @@ const Navbar: React.FC = () => {
             `}</style>
 
             {/* ✅ NAVBAR FIXE AVEC TRANSITION DE BACKGROUND AU SCROLL */}
-            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-white/20 backdrop-blur-sm shadow-sm py-3' : 'bg-transparent py-5'}`}>
+            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-white/30 backdrop-blur-sm shadow-sm py-3' : 'bg-transparent py-5'}`}>
                 <nav className="container mx-auto px-4 sm:px-6 lg:px-8 hidden lg:block" aria-label="Navigation principale">
                     <div className="flex items-center justify-between">
                         <div className="flex-shrink-0">
@@ -152,7 +152,7 @@ const Navbar: React.FC = () => {
                                 <ul ref={navRef} className="flex items-center space-x-8 xl:space-x-10 list-none m-0 p-0 relative z-[3]">
                                     {navLinks.map((link) => (
                                         <li key={link.name} className="relative cursor-pointer transition-all duration-300 nav-link-hover" onMouseEnter={handleLinkHover}>
-                                            <Link to={link.path} className={`relative py-2 text-sm xl:text-base font-medium text-stone-800 transition-all duration-300 hover:text-[#FE652D] ${isActive(link.path) ? 'nav-link-active' : ''}`} aria-current={isActive(link.path) ? 'page' : undefined}>
+                                            <Link to={link.path} className={`relative py-2 text-sm  font-medium text-white transition-all duration-300 hover:text-[#FE652D] ${isActive(link.path) ? 'nav-link-active' : ''}`} aria-current={isActive(link.path) ? 'page' : undefined}>
                                                 {link.name}
                                                 <span className="nav-dot" />
                                             </Link>
@@ -164,11 +164,11 @@ const Navbar: React.FC = () => {
                         </div>
 
                         <div className="flex items-center space-x-3">
-                            <button className="relative p-2 text-stone-800 hover:text-[#FE652D] transition-all duration-300 rounded-full hover:bg-stone-100 group" aria-label="Rechercher">
+                            <button className="relative p-2 text-white hover:text-[#FE652D] transition-all duration-300 rounded-full group" aria-label="Rechercher">
                                 <IoSearchSharp className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
                                 <span className="icon-dot" />
                             </button>
-                            <button className="relative p-2 text-stone-800 hover:text-[#FE652D] transition-all duration-300 rounded-full hover:bg-stone-100 group" aria-label="Voir le panier">
+                            <button className="relative p-2 text-white hover:text-[#FE652D] transition-all duration-300 rounded-full group" aria-label="Voir le panier">
                                 <FaShoppingCart className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
                                 <span className="icon-dot" />
                             </button>

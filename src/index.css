@@ -1,1 +1,36 @@
+/* src/index.css */
+
+/* ===== IMPORTS ===== */
 @import "tailwindcss";
+
+/* ===== POLICES GOOGLE ===== */
+
+/* ===== BASE ===== */
+@layer base {
+  /* Titres en Syne */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+  }
+
+  /* Corps de texte en Outfit */
+  body {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+  }
+
+  /* Par défaut tout en Outfit */
+  * {
+    font-family: 'Outfit', sans-serif;
+  }
+}
+
+/* ===== COMPOSANTS ===== */
+@layer components {
+  .font-syne {
+    font-family: 'Syne', sans-serif !important;
+  }
+  .font-outfit {
+    font-family: 'Outfit', sans-serif !important;
+  }
+}

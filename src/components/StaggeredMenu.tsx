@@ -30,7 +30,7 @@ export interface StaggeredMenuProps {
 
 export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     position = 'right',
-    // ✅ RIDEAU ORANGE DÉGRADÉ (Visible et élégant, plus de bleu)
+    //  RIDEAU ORANGE DÉGRADÉ (Visible et élégant, plus de bleu)
     colors = ['#FE652D', '#ff8a5c', '#ffffff'],
     items = [],
     displaySocials = false,
@@ -200,7 +200,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         const btn = toggleBtnRef.current;
         if (!btn) return;
         colorTweenRef.current?.kill();
-        const targetColor = '#FE652D'; 
+        const targetColor = '#FE652D';
         colorTweenRef.current = gsap.to(btn, { color: targetColor, delay: 0.18, duration: 0.3, ease: 'power2.out' });
     }, []);
 
@@ -280,13 +280,13 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                 data-position={position}
                 data-open={open || undefined}
             >
-                {/* ✅ RIDEAU ANIMÉ (Les couleurs sont appliquées ici sans logique de suppression) */}
+                {/*  RIDEAU ANIMÉ (Les couleurs sont appliquées ici sans logique de suppression) */}
                 <div className="sm-prelayers absolute top-0 right-0 bottom-0 pointer-events-none z-[5]" aria-hidden="true">
                     {colors.map((c, i) => (
-                        <div 
-                            key={i} 
-                            className="sm-prelayer absolute top-0 right-0 h-full w-full" 
-                            style={{ background: c }} 
+                        <div
+                            key={i}
+                            className="sm-prelayer absolute top-0 right-0 h-full w-full"
+                            style={{ background: c }}
                         />
                     ))}
                 </div>
