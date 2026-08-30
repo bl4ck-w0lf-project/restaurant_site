@@ -311,7 +311,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                         }`}
                     aria-label="Main navigation header"
                 >  <div className="sm-logo flex items-center select-none pointer-events-auto" aria-label="Logo">
-                        <img src="src/assets/logo.png" alt="Logo" className="sm-logo-img block h-20 md:h-20 w-auto object-contain" draggable={false} />
+                        <img src="/logo.png" alt="Logo" className="sm-logo-img block h-20 md:h-20 w-auto object-contain" draggable={false} />
                     </div>
 
                     <div className="flex items-center gap-3 md:gap-4 pointer-events-auto">

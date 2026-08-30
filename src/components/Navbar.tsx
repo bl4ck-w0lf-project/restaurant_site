@@ -144,7 +144,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenCart, onOpenSearch, cartCount }) 
 
                     {/* LOGO (Toujours visible, adapté mobile/desktop) */}
                     <Link to="/" className="block flex-shrink-0" aria-label="Page d'accueil">
-                        <img src="src/assets/logo.png" alt="Logo du restaurant" className="h-10 lg:h-14 w-auto object-contain transition-all duration-300" />
+                        <img src="/logo.png" alt="Logo du restaurant" className="h-10 lg:h-14 w-auto object-contain transition-all duration-300" />
                     </Link>
 
                     {/* NAVIGATION DESKTOP */}
