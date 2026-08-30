@@ -16,7 +16,7 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="relative bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 text-stone-400 pt-24 pb-12 border-t border-stone-800/50 overflow-hidden">
+        <footer className="relative bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 text-stone-400 pt-24 pb-12 border border-l-0 border-b-0 border-r-0 border-4 border-[#FE652D] overflow-hidden">
 
             {/* DÉTAIL GRAPHIQUE SUBTIL : Halo orange très diffus en arrière-plan */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FE652D]/5 rounded-full blur-[120px] pointer-events-none" />

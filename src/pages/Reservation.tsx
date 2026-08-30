@@ -144,34 +144,46 @@ export default function Reservation() {
        
         {/* NOUVELLE SECTION HERO AVEC IMAGE DE FOND */}
         {/* ========================================== */}
-        <section className="relative w-full h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-          {/* Image de fond NETTE (sans blur, sans scale) */}
+        <section className="relative min-h-[70vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden pt-20">
+    
           <div className="absolute inset-0 z-0">
-            <img 
-              src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1920" 
-              alt="Ambiance élégante du restaurant" 
-              className="w-full h-full object-cover"
-            />
-            {/* Overlay léger et propre (juste pour lisibilité du texte, pas de blur) */}
-            <div className="absolute inset-0 bg-stone-950/50" />
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=1920"
+            alt="Accueil du restaurant"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-stone-950/85 via-stone-900/80 to-black/80" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.3)_100%)]" />
+        </div>
 
-          {/* Contenu textuel par-dessus */}
-          <motion.div 
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-            className="relative z-10 text-center px-6 max-w-4xl"
-          >
-            <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tight mb-6 text-white drop-shadow-lg">
-              RÉSERVEZ <br />
-              <span className="text-[#FE652D] italic font-medium">VOTRE TABLE</span>
-            </motion.h1>
-            <motion.p variants={itemVariants} className="text-stone-200 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed drop-shadow-md">
-              Préparez-vous à vivre un moment unique autour d'une cuisine pensée avec passion, 
-              dans un cadre d'exception dédié à l'art de recevoir.
-            </motion.p>
-          </motion.div>
+
+           <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.9, ease: "easeOut" }}
+                    className="relative z-10 text-center text-white px-6 max-w-4xl"
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                      className="inline-flex items-center gap-2 mb-6 px-5 py-2 rounded-full border border-[#FE652D]/40 bg-white/5 backdrop-blur-sm"
+                    >
+                      <span className="font-montserrat text-xs font-medium tracking-[0.3em] uppercase text-white/90">
+                        Parlons-nous
+                      </span>
+                    </motion.div>
+          
+                    <h1 className="font-syne text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[0.95] tracking-tight">
+                      Réserver  <br />
+                      <span className="italic text-[#FE652D]">Votre table.</span>
+                    </h1>
+          
+                    <p className="font-outfit text-stone-200 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
+                      Préparez-vous à vivre un moment unique autour d'une cuisine pensée avec passion, 
+                      dans un cadre d'exception dédié à l'art de recevoir.
+                    </p>
+                  </motion.div>
         </section>
 
         {/* ========================================== */}

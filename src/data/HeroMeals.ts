@@ -33,7 +33,7 @@ export const HeroMeals: HeroMealItem[] = [
     {
         id: 3,
         name: "Filet de Bœuf",
-        img: "https://images.unsplash.com/photo-1546241072-48010ad2862c?auto=format&fit=crop&q=80&w=600",
+        img: "https://images.unsplash.com/photo-1666013942517-4e697f20e9ec?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         category: "plat_principal",
         description: "Filet de bœuf maturé, sauce truffe noire, purée de céleri"
     },

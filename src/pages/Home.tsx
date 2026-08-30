@@ -200,10 +200,10 @@ const OrbitalHero = () => {
 };
 
 // ==========================================
-// ABOUT SECTION
+// ABOUT SECTION - DARK MODE
 // ==========================================
 const AboutSection = () => (
-  <section className="py-24 bg-white">
+  <section className="py-24 bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950">
     <div className="container mx-auto px-6">
       <div className="flex flex-col md:flex-row items-center gap-16">
         <motion.div
@@ -215,18 +215,18 @@ const AboutSection = () => (
         >
           <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-[#FE652D]" />
           <img
-            src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=800"
-            alt="Intérieur du restaurant"
-            className="w-full h-[500px] object-cover rounded-2xl shadow-xl"
+            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80&w=800"
+            alt="Plat gastronomique"
+            className="w-full h-[500px] object-cover rounded-2xl shadow-2xl shadow-black/40"
           />
           <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-[#FE652D]" />
-          <div className="absolute -bottom-6 -left-6 bg-white shadow-xl rounded-xl p-4 flex items-center gap-3 border border-stone-100">
-            <div className="w-12 h-12 rounded-full bg-[#FE652D]/10 flex items-center justify-center">
+          <div className="absolute -bottom-6 -left-6 bg-stone-800/90 backdrop-blur-sm shadow-xl rounded-xl p-4 flex items-center gap-3 border border-white/10">
+            <div className="w-12 h-12 rounded-full bg-[#FE652D]/20 flex items-center justify-center">
               <Award className="w-6 h-6 text-[#FE652D]" />
             </div>
             <div>
-              <p className="text-sm font-medium text-stone-900">Étoile Michelin</p>
-              <p className="text-xs text-stone-500">2024</p>
+              <p className="text-sm font-medium text-white">Étoile Michelin</p>
+              <p className="text-xs text-stone-400">2024</p>
             </div>
           </div>
         </motion.div>
@@ -239,13 +239,13 @@ const AboutSection = () => (
           className="flex-1"
         >
           <span className="text-[#FE652D] font-medium tracking-[0.3em] text-sm uppercase mb-4 block">Notre Histoire</span>
-          <h2 className="text-4xl md:text-5xl font-serif text-stone-900 mb-6 leading-tight">
+          <h2 className="text-4xl md:text-5xl font-serif text-white mb-6 leading-tight">
             Un héritage de <br />saveurs authentiques
           </h2>
-          <p className="text-stone-600 text-lg leading-relaxed mb-6 font-light">
+          <p className="text-stone-300 text-lg leading-relaxed mb-6 font-light">
             Fondé sur la conviction que la grande cuisine est un art de l'équilibre, notre restaurant célèbre les produits du terroir sublimés par des techniques contemporaines. Chaque assiette est une toile, chaque bouchée une émotion.
           </p>
-          <a href="/about" className="inline-flex items-center gap-2 mt-8 text-[#FE652D] font-medium border-b border-[#FE652D] pb-1 hover:text-stone-900 hover:border-stone-900 transition-colors">
+          <a href="/about" className="inline-flex items-center gap-2 mt-8 text-[#FE652D] font-medium border-b border-[#FE652D] pb-1 hover:text-white hover:border-white transition-colors">
             En savoir plus <ArrowRight size={16} />
           </a>
         </motion.div>
@@ -253,7 +253,6 @@ const AboutSection = () => (
     </div>
   </section>
 );
-
 
 
 // ==========================================
@@ -408,52 +407,55 @@ const ReservationSection = () => (
   </section>
 );
 
-
 // ==========================================
-// CONTACT SECTION
+// CONTACT SECTION - DARK MODE
 // ==========================================
 const ContactSection = () => (
-  <section className="py-24 bg-white">
+  <section className="py-24 bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950">
     <div className="container mx-auto px-6">
       <div className="grid md:grid-cols-2 gap-16">
         <div>
           <span className="text-[#FE652D] font-medium tracking-[0.3em] text-sm uppercase mb-4 block">Contact</span>
-          <h2 className="text-4xl font-serif text-stone-900 mb-8">Nous trouver</h2>
+          <h2 className="text-4xl font-serif text-white mb-8">Nous trouver</h2>
           <div className="space-y-6">
             <div className="flex items-start gap-4 group">
-              <div className="w-12 h-12 rounded-xl bg-stone-100 flex items-center justify-center text-[#FE652D] shrink-0 group-hover:bg-[#FE652D] group-hover:text-white transition-all duration-300">
+              <div className="w-12 h-12 rounded-xl bg-stone-800/50 flex items-center justify-center text-[#FE652D] shrink-0 group-hover:bg-[#FE652D] group-hover:text-white transition-all duration-300">
                 <MapPin size={20} />
               </div>
               <div>
-                <h4 className="font-medium text-stone-900 mb-1">Adresse</h4>
-                <p className="text-stone-600">12 Avenue de la Gastronomie<br />75008 Paris, France</p>
+                <h4 className="font-medium text-white mb-1">Adresse</h4>
+                <p className="text-stone-400">12 Avenue de la Gastronomie<br />75008 Paris, France</p>
               </div>
             </div>
             <div className="flex items-start gap-4 group">
-              <div className="w-12 h-12 rounded-xl bg-stone-100 flex items-center justify-center text-[#FE652D] shrink-0 group-hover:bg-[#FE652D] group-hover:text-white transition-all duration-300">
+              <div className="w-12 h-12 rounded-xl bg-stone-800/50 flex items-center justify-center text-[#FE652D] shrink-0 group-hover:bg-[#FE652D] group-hover:text-white transition-all duration-300">
                 <Phone size={20} />
               </div>
               <div>
-                <h4 className="font-medium text-stone-900 mb-1">Téléphone</h4>
-                <p className="text-stone-600">+33 1 23 45 67 89</p>
+                <h4 className="font-medium text-white mb-1">Téléphone</h4>
+                <p className="text-stone-400">+33 1 23 45 67 89</p>
               </div>
             </div>
           </div>
           <div className="flex gap-4 mt-8">
-            <a href="#" className="w-12 h-12 rounded-xl bg-stone-100 flex items-center justify-center text-stone-600 hover:bg-[#FE652D] hover:text-white transition-all duration-300">
+            <a href="#" className="w-12 h-12 rounded-xl bg-stone-800/50 flex items-center justify-center text-stone-400 hover:bg-[#FE652D] hover:text-white transition-all duration-300">
               <FaInstagram size={20} />
             </a>
-            <a href="#" className="w-12 h-12 rounded-xl bg-stone-100 flex items-center justify-center text-stone-600 hover:bg-[#FE652D] hover:text-white transition-all duration-300">
+            <a href="#" className="w-12 h-12 rounded-xl bg-stone-800/50 flex items-center justify-center text-stone-400 hover:bg-[#FE652D] hover:text-white transition-all duration-300">
               <FaFacebook size={20} />
             </a>
           </div>
         </div>
-        <div className="bg-stone-100 rounded-2xl h-[450px] flex items-center justify-center relative overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=800" alt="Carte" className="absolute inset-0 w-full h-full object-cover opacity-80" />
-          <div className="relative z-10 bg-white/95 backdrop-blur-sm p-6 rounded-xl shadow-lg text-center max-w-xs">
+        <div className="bg-stone-800/50 rounded-2xl h-[450px] flex items-center justify-center relative overflow-hidden border border-white/5">
+          <img 
+            src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=800" 
+            alt="Carte" 
+            className="absolute inset-0 w-full h-full object-cover opacity-60" 
+          />
+          <div className="relative z-10 bg-stone-900/90 backdrop-blur-sm p-6 rounded-xl shadow-lg text-center max-w-xs border border-white/10">
             <MapPin className="w-6 h-6 text-[#FE652D] mx-auto mb-2" />
-            <p className="font-serif text-xl text-stone-900 mb-2">Au cœur de Paris</p>
-            <p className="text-stone-600 text-sm">À 2 min du métro Concorde</p>
+            <p className="font-serif text-xl text-white mb-2">Au cœur de Paris</p>
+            <p className="text-stone-400 text-sm">À 2 min du métro Concorde</p>
           </div>
         </div>
       </div>
@@ -462,13 +464,12 @@ const ContactSection = () => (
 );
 
 
-
 // ==========================================
 // COMPOSANT PRINCIPAL
 // ==========================================
 export default function Home() {
   return (
-    <main className="bg-[#FDFBF7] text-stone-900 font-sans antialiased selection:bg-[#FE652D] selection:text-white">
+    <main className=" text-stone-900 font-sans antialiased selection:bg-[#FE652D] selection:text-white">
 
       <OrbitalHero />
       <AboutSection />

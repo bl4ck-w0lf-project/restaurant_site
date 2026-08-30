@@ -21,16 +21,17 @@ export interface StaggeredMenuProps {
     menuButtonColor?: string;
     openMenuButtonColor?: string;
     accentColor?: string;
-    isFixed: boolean;
+    isFixed?: boolean;
     changeMenuColorOnOpen?: boolean;
     closeOnClickAway?: boolean;
     onMenuOpen?: () => void;
     onMenuClose?: () => void;
+    onOpenCart?: () => void;       // ✅ AJOUTÉ
+    onOpenSearch?: () => void;     // ✅ AJOUTÉ
 }
 
 export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     position = 'right',
-    //  RIDEAU ORANGE DÉGRADÉ (Visible et élégant, plus de bleu)
     colors = ['#FE652D', '#ff8a5c', '#ffffff'],
     items = [],
     displaySocials = false,
@@ -44,7 +45,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     isFixed = false,
     closeOnClickAway = true,
     onMenuOpen,
-    onMenuClose
+    onMenuClose,
+    onOpenCart,       // ✅ AJOUTÉ
+    onOpenSearch      // ✅ AJOUTÉ
 }: StaggeredMenuProps) => {
     const [open, setOpen] = useState(false);
     const openRef = useRef(false);
@@ -273,14 +276,14 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     }, [closeOnClickAway, open, closeMenu]);
 
     return (
-        <div className={`sm-scope z-40 ${isFixed ? 'fixed top-0 left-0 w-screen h-screen overflow-hidden' : 'w-full h-full'}`}>
+        // ✅ CORRECTION : suppression de 'overflow-hidden' et 'fixed' agressif qui cachait la page
+        <div className="sm-scope fixed inset-0 z-[9999]  pointer-events-none">
             <div
                 className={(className ? className + ' ' : '') + 'staggered-menu-wrapper pointer-events-none relative w-full h-full z-40'}
                 style={{ '--sm-accent': accentColor } as React.CSSProperties}
                 data-position={position}
                 data-open={open || undefined}
             >
-                {/*  RIDEAU ANIMÉ (Les couleurs sont appliquées ici sans logique de suppression) */}
                 <div className="sm-prelayers absolute top-0 right-0 bottom-0 pointer-events-none z-[5]" aria-hidden="true">
                     {colors.map((c, i) => (
                         <div
@@ -336,7 +339,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                                         <Link
                                             to={it.link}
                                             onClick={closeMenu}
-                                            className="sm-panel-item relative text-[#111111] font-semibold text-[2.5rem] md:text-[4rem] cursor-pointer leading-none tracking-[-1px] md:tracking-[-2px] uppercase transition-colors duration-150 ease-linear inline-block no-underline pr-[1.4em] hover:text-[#FE652D] focus:outline-none focus:text-[#FE652D]"
+                                            className="sm-panel-item relative text-[#111111] my-3 font-semibold text-[2.5rem] md:text-[4rem] cursor-pointer leading-none tracking-[-1px] md:tracking-[-2px] uppercase transition-colors duration-150 ease-linear inline-block no-underline pr-[1.4em] hover:text-[#FE652D] focus:outline-none focus:text-[#FE652D]"
                                             aria-label={it.ariaLabel}
                                             data-index={idx + 1}
                                         >
@@ -355,25 +358,30 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                             )}
                         </ul>
 
-                        <div className="mt-auto pt-8 flex flex-col gap-4 border-t border-gray-100">
-                            <div className="relative group">
-                                <IoSearchSharp className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 transition-colors group-focus-within:text-[#FE652D]" />
-                                <input
-                                    type="text"
-                                    placeholder="Rechercher un plat, une info..."
-                                    className="w-full bg-gray-50 border border-gray-200 text-gray-800 text-base rounded-lg focus:ring-2 focus:ring-[#FE652D] focus:border-[#FE652D] focus:outline-none block pl-12 pr-4 py-3.5 transition-all placeholder:text-gray-400"
-                                />
-                            </div>
+                        {/* ✅ BOUTONS CONNECTÉS AUX COMPOSANTS GLOBAUX */}
+                        <div className="mt-auto pt-8 flex flex-col gap-4 border-t border-stone-200">
+                            <button
+                                onClick={() => {
+                                    closeMenu();
+                                    onOpenSearch?.();
+                                }}
+                                className="relative overflow-hidden bg-stone-100 text-stone-800 font-medium py-3.5 px-5 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-base tracking-wide group flex items-center justify-center gap-3 focus:outline-none focus:ring-2 focus:ring-[#FE652D] focus:ring-offset-2"
+                            >
+                                <IoSearchSharp className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+                                <span className="relative z-10 font-semibold">Rechercher</span>
+                            </button>
 
-                            <Link
-                                to="/panier"
-                                onClick={closeMenu}
-                                className="relative overflow-hidden bg-[#FE652D] text-white font-medium py-3.5 px-5 rounded-md shadow-md hover:shadow-lg transition-all duration-300 text-base tracking-wide group flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#FE652D] focus:ring-offset-2"
+                            <button
+                                onClick={() => {
+                                    closeMenu();
+                                    onOpenCart?.();
+                                }}
+                                className="relative overflow-hidden bg-[#FE652D] text-white font-medium py-3.5 px-5 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 text-base tracking-wide group flex items-center justify-center gap-3 focus:outline-none focus:ring-2 focus:ring-[#FE652D] focus:ring-offset-2"
                             >
                                 <FaShoppingCart className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
                                 <span className="relative z-10 font-semibold">Mon Panier</span>
                                 <span className="absolute inset-0 bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-                            </Link>
+                            </button>
                         </div>
                     </div>
                 </aside>
@@ -405,8 +413,31 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                 .sm-scope .sm-icon { position: relative; width: 14px; height: 14px; flex: 0 0 14px; display: inline-flex; align-items: center; justify-content: center; }
                 .sm-scope .sm-icon-line { position: absolute; left: 50%; top: 50%; width: 100%; height: 2px; background: currentColor; border-radius: 2px; transform: translate(-50%, -50%); }
                 
-                .sm-scope .staggered-menu-panel { position: absolute; top: 0; right: 0; width: clamp(260px, 85vw, 420px); height: 100%; background: white; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; flex-direction: column; overflow-y: auto; z-index: 10; pointer-events: auto; }
-                .sm-scope .sm-prelayers { position: absolute; top: 0; right: 0; bottom: 0; width: clamp(260px, 85vw, 420px); pointer-events: none; z-index: 5; }
+                .sm-scope .staggered-menu-panel { 
+                    position: fixed; /* <-- CHANGÉ EN FIXED */
+                    top: 0; 
+                    right: 0; 
+                    width: clamp(260px, 85vw, 420px); 
+                    height: 100vh; /* <-- CHANGÉ EN 100vh (HAUTEUR ÉCRAN) */
+                    background: white; 
+                    backdrop-filter: blur(12px); 
+                    -webkit-backdrop-filter: blur(12px); 
+                    display: flex; 
+                    flex-direction: column; 
+                    overflow-y: auto; 
+                    z-index: 10; 
+                    pointer-events: auto; 
+                }
+
+                .sm-scope .sm-prelayers { 
+                    position: fixed; /* <-- CHANGÉ EN FIXED */
+                    top: 0; 
+                    right: 0; 
+                    bottom: 0; 
+                    width: clamp(260px, 85vw, 420px); 
+                    pointer-events: none; 
+                    z-index: 5; 
+                }
                 .sm-scope .sm-prelayer { position: absolute; top: 0; right: 0; height: 100%; width: 100%; transform: translateX(0); }
                 .sm-scope .sm-panel-inner { flex: 1; display: flex; flex-direction: column; gap: 1.25rem; }
                 .sm-scope .sm-panel-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }

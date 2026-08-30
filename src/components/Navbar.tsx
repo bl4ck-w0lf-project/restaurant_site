@@ -6,7 +6,14 @@ import { MdRestaurantMenu } from 'react-icons/md';
 import logo from '../assets/logo.png';
 import StaggeredMenu from './StaggeredMenu';
 
-const Navbar: React.FC = () => {
+// ✅ 1. Définition des props attendues depuis App.tsx
+interface NavbarProps {
+    onOpenCart: () => void;
+    onOpenSearch: () => void;
+    cartCount: number;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onOpenCart, onOpenSearch, cartCount }) => {
     const location = useLocation();
     const [isScrolled, setIsScrolled] = useState(false);
 
@@ -33,16 +40,12 @@ const Navbar: React.FC = () => {
         { label: 'Contact', ariaLabel: 'Nous contacter', link: '/contact' }
     ];
 
-    // Détection du scroll pour changer le style de la navbar
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
-        };
+        const handleScroll = () => setIsScrolled(window.scrollY > 50);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Effet Gooey pour les liens desktop
     useEffect(() => {
         if (!navRef.current || !containerRef.current) return;
         const activeLi = navRef.current.querySelectorAll('li')[navLinks.findIndex(link => link.path === location.pathname)] as HTMLElement;
@@ -137,8 +140,7 @@ const Navbar: React.FC = () => {
                 .group:hover .icon-dot { opacity: 1; transform: translateX(-50%) scale(1); }
             `}</style>
 
-            {/* ✅ NAVBAR FIXE AVEC TRANSITION DE BACKGROUND AU SCROLL */}
-            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-transparent backdrop-blur-sm shadow-sm py-3' : 'bg-transparent py-5'}`}>
+            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-transparent backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-5'}`}>
                 <nav className="container mx-auto px-4 sm:px-6 lg:px-8 hidden lg:block" aria-label="Navigation principale">
                     <div className="flex items-center justify-between">
                         <div className="flex-shrink-0">
@@ -152,7 +154,7 @@ const Navbar: React.FC = () => {
                                 <ul ref={navRef} className="flex items-center space-x-8 xl:space-x-10 list-none m-0 p-0 relative z-[3]">
                                     {navLinks.map((link) => (
                                         <li key={link.name} className="relative cursor-pointer transition-all duration-300 nav-link-hover" onMouseEnter={handleLinkHover}>
-                                            <Link to={link.path} className={`relative py-2 text-sm  font-medium text-white transition-all duration-300 hover:text-[#FE652D] ${isActive(link.path) ? 'nav-link-active' : ''}`} aria-current={isActive(link.path) ? 'page' : undefined}>
+                                            <Link to={link.path} className={`relative py-2 text-sm font-medium text-white transition-all duration-300 hover:text-[#FE652D] ${isActive(link.path) ? 'nav-link-active' : ''}`} aria-current={isActive(link.path) ? 'page' : undefined}>
                                                 {link.name}
                                                 <span className="nav-dot" />
                                             </Link>
@@ -164,14 +166,31 @@ const Navbar: React.FC = () => {
                         </div>
 
                         <div className="flex items-center space-x-3">
-                            <button className="relative p-2 text-white hover:text-[#FE652D] transition-all duration-300 rounded-full group" aria-label="Rechercher">
+                            {/* ✅ 2. Bouton Recherche connecté */}
+                            <button
+                                onClick={onOpenSearch}
+                                className="relative p-2 text-white hover:text-[#FE652D] transition-all duration-300 rounded-full group cursor-pointer"
+                                aria-label="Rechercher"
+                            >
                                 <IoSearchSharp className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
                                 <span className="icon-dot" />
                             </button>
-                            <button className="relative p-2 text-white hover:text-[#FE652D] transition-all duration-300 rounded-full group" aria-label="Voir le panier">
+
+                            {/* ✅ 3. Bouton Panier connecté avec badge */}
+                            <button
+                                onClick={onOpenCart}
+                                className="relative p-2 text-white hover:text-[#FE652D] transition-all duration-300 rounded-full group cursor-pointer"
+                                aria-label="Voir le panier"
+                            >
                                 <FaShoppingCart className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+                                {cartCount > 0 && (
+                                    <span className="absolute -top-1 -right-1 bg-[#FE652D] text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-stone-950 animate-bounce-short">
+                                        {cartCount}
+                                    </span>
+                                )}
                                 <span className="icon-dot" />
                             </button>
+
                             <Link to="/reservation" className="relative overflow-hidden bg-[#FE652D] text-white font-medium py-2.5 px-5 rounded-md shadow-md hover:shadow-lg transition-all duration-300 text-sm tracking-wide group flex items-center gap-2">
                                 <MdRestaurantMenu className="h-4 w-4" />
                                 <span className="relative z-10">Réserver</span>
@@ -181,7 +200,7 @@ const Navbar: React.FC = () => {
                     </div>
                 </nav>
 
-                {/* MENU MOBILE (StaggeredMenu) */}
+                                {/* MENU MOBILE (StaggeredMenu) */}
                 <div className="lg:hidden">
                     <StaggeredMenu
                         position="right"
@@ -193,9 +212,11 @@ const Navbar: React.FC = () => {
                         menuButtonColor={isScrolled ? "#FE652D" : "#FE652D"}
                         openMenuButtonColor="#FE652D"
                         accentColor="#FE652D"
-                        isFixed={true}
+                        isFixed={true} /* ✅ Important : empêche le menu de cacher le reste de la page */
                         changeMenuColorOnOpen={true}
                         closeOnClickAway={true}
+                        onOpenCart={onOpenCart}       /* ✅ Connecte le bouton "Mon Panier" du menu mobile */
+                        onOpenSearch={onOpenSearch}   /* ✅ Connecte le bouton "Rechercher" du menu mobile */
                     />
                 </div>
             </header>
