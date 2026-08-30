@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, Plus, Check } from 'lucide-react';
+import { Search, X, Check } from 'lucide-react';
 import type { MenuItem } from '../data/MenuMeals';
 import { FaShoppingCart } from "react-icons/fa";
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   User, Mail, MessageCircle, MessageSquare, ArrowRight, 
-  MapPin, Phone, Clock, Star 
+   Clock, Star 
 } from 'lucide-react';
 
 
@@ -27,32 +27,6 @@ const Contact: React.FC = () => {
     console.log('Formulaire soumis:', formData);
   };
 
-  const inputFields = [
-    { 
-      id: 'name', 
-      name: 'name', 
-      label: 'Nom & prénom', 
-      icon: User, 
-      type: 'text',
-      placeholder: 'Jean Dupont'
-    },
-    { 
-      id: 'email', 
-      name: 'email', 
-      label: 'Email', 
-      icon: Mail, 
-      type: 'email',
-      placeholder: 'jean@email.com'
-    },
-    { 
-      id: 'subject', 
-      name: 'subject', 
-      label: 'Sujet', 
-      icon: MessageCircle, 
-      type: 'text',
-      placeholder: 'Réservation de groupe'
-    },
-  ];
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 text-white font-sans antialiased selection:bg-[#FE652D] selection:text-white">

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
-  ChefHat, Wine, UtensilsCrossed, MapPin, Phone, Mail,
-  Clock, ArrowRight, Star, Award, Fish, Coffee, Pizza,
-  Soup, Cake, GlassWater, Martini, Table
+  ChefHat, Wine, UtensilsCrossed, MapPin, Phone, 
+  Clock, ArrowRight, Star, Award, Fish, Coffee, 
+   Cake, Martini, 
 } from 'lucide-react';
 import { FaInstagram, FaFacebook } from 'react-icons/fa';
 
