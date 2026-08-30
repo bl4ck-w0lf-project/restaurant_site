@@ -140,11 +140,11 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenCart, onOpenSearch, cartCount }) 
 
             {/* ✅ SEUL ET UNIQUE top-0 pour toute la barre de navigation */}
             <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-transparent backdrop-blur-md border-b border-white/5">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between  h-0 md:-h-90 lg:h-20">
 
                     {/* LOGO (Toujours visible, adapté mobile/desktop) */}
                     <Link to="/" className="block flex-shrink-0" aria-label="Page d'accueil">
-                        <img src={logo} alt="Logo du restaurant" className="h-10 lg:h-14 w-auto object-contain transition-all duration-300" />
+                        <img src="src/assets/logo.png" alt="Logo du restaurant" className="h-10 lg:h-14 w-auto object-contain transition-all duration-300" />
                     </Link>
 
                     {/* NAVIGATION DESKTOP */}

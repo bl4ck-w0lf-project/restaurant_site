@@ -13,11 +13,15 @@
     font-weight: 700;
   }
 
-  /* Corps de texte en Outfit */
-  body {
-    font-family: 'Outfit', sans-serif;
-    font-weight: 400;
-  }
+  
+  html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 400;
+  background-color: #0c0a09; /* Force la couleur stone-950 partout */
+  overscroll-behavior-y: none; /* Bloque l'effet élastique blanc sur mobile */
+}
 
   /* Par défaut tout en Outfit */
   * {

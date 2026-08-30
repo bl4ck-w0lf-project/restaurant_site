@@ -1,4 +1,4 @@
-import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -52,6 +52,15 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 }: StaggeredMenuProps) => {
     const [open, setOpen] = useState(false);
     const openRef = useRef(false);
+
+    // ✅ AJOUT : Gestion du scroll pour le header
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => setIsScrolled(window.scrollY > 30);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const panelRef = useRef<HTMLDivElement | null>(null);
     const preLayersRef = useRef<HTMLDivElement | null>(null);
@@ -278,7 +287,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
     return (
         // ✅ CORRECTION : suppression de 'overflow-hidden' et 'fixed' agressif qui cachait la page
-        <div className="sm-scope fixed inset-0 z-[9999]  pointer-events-none">
+        <div className="sm-scope fixed top-0 left-0 inset-0 z-[9999]  pointer-events-none">
             <div
                 className={(className ? className + ' ' : '') + 'staggered-menu-wrapper pointer-events-none relative w-full h-full z-40'}
                 style={{ '--sm-accent': accentColor } as React.CSSProperties}
@@ -295,9 +304,14 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                     ))}
                 </div>
 
-                <header className="staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-between px-5 py-5 md:p-[2em] bg-transparent pointer-events-none z-20" aria-label="Main navigation header">
-                    <div className="sm-logo flex items-center select-none pointer-events-auto" aria-label="Logo">
-                        <img src={logoUrl} alt="Logo" className="sm-logo-img block h-16 md:h-20 w-auto object-contain" draggable={false} />
+                <header
+                    className={`staggered-menu-header fixed right-0 top-0 left-0 w-full flex items-center justify-between px-5 py-3 md:p-[1em] transition-all duration-300 pointer-events-none z-50 ${isScrolled
+                            ? 'bg-stone-800/90 backdrop-blur-md shadow-lg'
+                            : ' backdrop-blur-sm'
+                        }`}
+                    aria-label="Main navigation header"
+                >  <div className="sm-logo flex items-center select-none pointer-events-auto" aria-label="Logo">
+                        <img src="src/assets/logo.png" alt="Logo" className="sm-logo-img block h-20 md:h-20 w-auto object-contain" draggable={false} />
                     </div>
 
                     <div className="flex items-center gap-3 md:gap-4 pointer-events-auto">

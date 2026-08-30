@@ -1,1 +1,7 @@
 @import "tailwindcss";
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: #0c0a09; /* Force la couleur stone-950 partout */
+  overscroll-behavior-y: none; /* Bloque l'effet élastique blanc sur mobile */
+}

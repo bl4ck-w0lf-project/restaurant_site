@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Mail } from 'lucide-react';
 import { FaInstagram, FaFacebook } from 'react-icons/fa';
@@ -144,8 +144,8 @@ export default function Footer() {
                     <p>© {new Date().getFullYear()} L'Art Culinaire. Tous droits réservés.</p>
 
                     <div className="flex items-center gap-6">
-                        <a href="https://hounmenou-ricardo.vercel.app/" className="text-md transition-colors duration-300">
-                           Fait par <span className='text-[#FE652D]'>Ricardo</span>
+                        <a href="https://hounmenou-ricardo.vercel.app/" target="_blank" className="text-md transition-colors duration-300">
+                            Fait par <span className='text-[#FE652D]'>Ricardo</span>
                         </a>
                     </div>
 
