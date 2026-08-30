@@ -23,7 +23,7 @@ const OrbitalHero = () => {
   const [rotation, setRotation] = useState(0);
   const activeDish = HeroMeals.find(d => d.id === activeId) || HeroMeals[0];
 
-  // ✅ 1. RAYON D'ORBITE DYNAMIQUE (Sécurisé et corrigé)
+  //  1. RAYON D'ORBITE DYNAMIQUE (Sécurisé et corrigé)
   const [orbitRadius, setOrbitRadius] = useState(130); // Valeur par défaut safe (mobile)
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const OrbitalHero = () => {
       }
       else if (window.innerWidth < 1024) {
         setOrbitRadius(300); // Tablette : rayon moyen (corrigé de 30 à 200)
-      } else { 
+      } else {
         setOrbitRadius(350); // Desktop : rayon large
       }
     };
@@ -154,7 +154,7 @@ const OrbitalHero = () => {
           </motion.div>
 
           {/* ===== PARTIE DROITE : ORBITAL INTERACTIF ===== */}
-          {/* ✅ 2. CONTENEUR STABLE : min-h garantit que l'orbite ne s'écrase pas sur mobile */}
+          {/*  2. CONTENEUR STABLE : min-h garantit que l'orbite ne s'écrase pas sur mobile */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -166,7 +166,7 @@ const OrbitalHero = () => {
             <div className="absolute inset-0 border border-dashed border-white/20 rounded-full scale-[0.75] opacity-60 animate-[spin_80s_linear_infinite]" />
 
             {/* ===== PLAT CENTRAL ===== */}
-            {/* ✅ 3. TAILLES RESPONSIVES : Plus petit sur mobile, progressif vers desktop */}
+            {/*  3. TAILLES RESPONSIVES : Plus petit sur mobile, progressif vers desktop */}
             <motion.div
               key={`center-${activeId}`}
               initial={{ scale: 0.9, opacity: 0 }}
@@ -181,7 +181,7 @@ const OrbitalHero = () => {
               />
 
               {/* Cadre de texte (Glassmorphism Dark) */}
-              <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 p-2 sm:p-4 bg-stone-900/80 backdrop-blur-md rounded-lg sm:rounded-xl border border-white/10 shadow-lg">
+              <div className="hidden md:block absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 p-2 sm:p-4 bg-stone-900/80 backdrop-blur-md rounded-lg sm:rounded-xl border border-white/10 shadow-lg">
                 <h3 className="text-white font-serif text-sm sm:text-xl md:text-2xl leading-none">{activeDish.name}</h3>
                 <p className="text-stone-400 text-[10px] sm:text-sm mt-1 sm:mt-2 font-light line-clamp-2">{activeDish.description}</p>
               </div>
@@ -200,7 +200,7 @@ const OrbitalHero = () => {
                   animate={{ x, y, scale: 0.7, opacity: 0.9 }} // Scale de base plus petit pour mobile
                   whileHover={{ scale: 0.9, opacity: 1, zIndex: 30 }}
                   onClick={() => handleDishClick(dish.id)}
-                  // ✅ 4. TAILLES DES SPLATS RESPONSIVES
+                  //  4. TAILLES DES SPLATS RESPONSIVES
                   className="absolute w-[150px] h-[150px] sm:w-40 sm:h-40 md:w-50 md:h-50 lg:w-42 lg:h-42 rounded-xl overflow-hidden shadow-xl cursor-pointer z-10 border border-white/20 sm:border-2"
                 >
                   <img
