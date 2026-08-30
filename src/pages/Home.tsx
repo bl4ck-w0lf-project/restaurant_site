@@ -30,11 +30,11 @@ const OrbitalHero = () => {
     // Fonction qui met à jour le rayon selon la taille de l'écran
     const updateRadius = () => {
       if (window.innerWidth < 640) {
-        setOrbitRadius(230); // Mobile : rayon serré mais visible
+        setOrbitRadius(30); // Mobile : rayon serré mais visible
       } else if (window.innerWidth < 1024) {
         setOrbitRadius(300); // Tablette : rayon moyen (corrigé de 30 à 200)
-      } else {
-        setOrbitRadius(520); // Desktop : rayon large
+      } else { 
+        setOrbitRadius(350); // Desktop : rayon large
       }
     };
 
@@ -125,7 +125,7 @@ const OrbitalHero = () => {
                   Réserver une table <ArrowRight size={18} />
                 </motion.div>
               </Link>
-              
+
               <Link to="/menu" className="w-full sm:w-auto">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
