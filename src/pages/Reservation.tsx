@@ -4,8 +4,7 @@ import {
   User, Mail, Phone, CalendarDays, Users, 
   Clock, PartyPopper, MessageSquare, ArrowRight 
 } from 'lucide-react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+
 
 // ==========================================
 // COMPOSANT RÉUTILISABLE POUR LES CHAMPS

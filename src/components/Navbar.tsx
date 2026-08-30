@@ -139,7 +139,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenCart, onOpenSearch, cartCount }) 
             `}</style>
 
             {/* ✅ SEUL ET UNIQUE top-0 pour toute la barre de navigation */}
-            <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-stone-950/80 backdrop-blur-md border-b border-white/5">
+            <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-transparent backdrop-blur-md border-b border-white/5">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
 
                     {/* LOGO (Toujours visible, adapté mobile/desktop) */}

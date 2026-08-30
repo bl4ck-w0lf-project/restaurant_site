@@ -6,7 +6,7 @@ import {
   Soup, Cake, GlassWater, Martini, Table
 } from 'lucide-react';
 import { FaInstagram, FaFacebook } from 'react-icons/fa';
-import Navbar from '../components/Navbar';
+
 import EchoText from '../components/EchoText';
 import MagicBento from '../components/MagicBento';
 import { HeroMeals } from '../data/HeroMeals';

@@ -4,9 +4,8 @@ import {
   User, Mail, MessageCircle, MessageSquare, ArrowRight, 
   MapPin, Phone, Clock, Star 
 } from 'lucide-react';
-import { FaInstagram, FaFacebook } from 'react-icons/fa';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+
+
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
