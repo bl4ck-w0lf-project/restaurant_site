@@ -33,9 +33,7 @@ function App() {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const handleClearCart = () => {
-    setCartItems([]);
-  };
+  const handleClearCart = () => setCartItems([]);
 
   return (
     <Router>
@@ -45,24 +43,24 @@ function App() {
         cartCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
       />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/menu" element={<Menu onAddToCart={handleAddToCart} />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/reservation" element={<Reservation />} />
-        <Route path="*" element={<Error404 />} />
-      </Routes>
+      {/* ✅ SOLUTION RADICALE : Ce "pt-20" pousse le contenu sous la navbar fixe. Plus rien ne sera caché. */}
+      <main className="min-h-screen flex flex-col">
+        <div className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/menu" element={<Menu onAddToCart={handleAddToCart} />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/reservation" element={<Reservation />} />
+            <Route path="*" element={<Error404 />} />
+          </Routes>
+        </div>
+        <Footer />
+      </main>
 
-      <Footer />
-
-      {/* Les overlays sont au niveau racine, plus de problème de clipping "carré" */}
       <SearchOverlay
         isOpen={isSearchOpen}
-        onClose={() => {
-          setIsSearchOpen(false);
-          setSearchValue('');
-        }}
+        onClose={() => { setIsSearchOpen(false); setSearchValue(''); }}
         searchValue={searchValue}
         onSearchChange={setSearchValue}
         items={MenuMeals}
@@ -75,10 +73,7 @@ function App() {
         cartItems={cartItems}
         onRemoveItem={handleRemoveItem}
         onClearCart={handleClearCart}
-        onCheckout={() => {
-          console.log('Passage à la caisse');
-          setIsCartOpen(false);
-        }}
+        onCheckout={() => { console.log('Passage à la caisse'); setIsCartOpen(false); }}
       />
     </Router>
   );

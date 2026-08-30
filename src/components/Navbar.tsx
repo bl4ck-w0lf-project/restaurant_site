@@ -6,7 +6,6 @@ import { MdRestaurantMenu } from 'react-icons/md';
 import logo from '../assets/logo.png';
 import StaggeredMenu from './StaggeredMenu';
 
-// ✅ 1. Définition des props attendues depuis App.tsx
 interface NavbarProps {
     onOpenCart: () => void;
     onOpenSearch: () => void;
@@ -17,7 +16,6 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenCart, onOpenSearch, cartCount }) 
     const location = useLocation();
     const [isScrolled, setIsScrolled] = useState(false);
 
-    // Refs pour l'effet Gooey (Desktop uniquement)
     const navRef = useRef<HTMLUListElement>(null);
     const filterRef = useRef<HTMLSpanElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -140,84 +138,68 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenCart, onOpenSearch, cartCount }) 
                 .group:hover .icon-dot { opacity: 1; transform: translateX(-50%) scale(1); }
             `}</style>
 
-            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-transparent backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-5'}`}>
-                <nav className="container mx-auto px-4 sm:px-6 lg:px-8 hidden lg:block" aria-label="Navigation principale">
-                    <div className="flex items-center justify-between">
-                        <div className="flex-shrink-0">
-                            <Link to="/" className="block" aria-label="Page d'accueil">
-                                <img src={logo} alt="Logo du restaurant" className={`h-14 w-auto object-contain transition-all duration-300 ${isScrolled ? 'h-12' : 'h-16'}`} />
-                            </Link>
+            {/* ✅ SEUL ET UNIQUE top-0 pour toute la barre de navigation */}
+            <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-stone-950/80 backdrop-blur-md border-b border-white/5">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+
+                    {/* LOGO (Toujours visible, adapté mobile/desktop) */}
+                    <Link to="/" className="block flex-shrink-0" aria-label="Page d'accueil">
+                        <img src={logo} alt="Logo du restaurant" className="h-10 lg:h-14 w-auto object-contain transition-all duration-300" />
+                    </Link>
+
+                    {/* NAVIGATION DESKTOP */}
+                    <nav className="hidden lg:flex items-center justify-center flex-1">
+                        <div className="relative" ref={containerRef}>
+                            <ul ref={navRef} className="flex items-center space-x-8 xl:space-x-10 list-none m-0 p-0 relative z-[3]">
+                                {navLinks.map((link) => (
+                                    <li key={link.name} className="relative cursor-pointer transition-all duration-300 nav-link-hover" onMouseEnter={handleLinkHover}>
+                                        <Link to={link.path} className={`relative py-2 text-sm font-medium text-white transition-all duration-300 hover:text-[#FE652D] ${isActive(link.path) ? 'nav-link-active' : ''}`} aria-current={isActive(link.path) ? 'page' : undefined}>
+                                            {link.name}
+                                            <span className="nav-dot" />
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                            <span className="effect filter" ref={filterRef} />
                         </div>
+                    </nav>
 
-                        <div className="flex items-center justify-center flex-1">
-                            <div className="relative" ref={containerRef}>
-                                <ul ref={navRef} className="flex items-center space-x-8 xl:space-x-10 list-none m-0 p-0 relative z-[3]">
-                                    {navLinks.map((link) => (
-                                        <li key={link.name} className="relative cursor-pointer transition-all duration-300 nav-link-hover" onMouseEnter={handleLinkHover}>
-                                            <Link to={link.path} className={`relative py-2 text-sm font-medium text-white transition-all duration-300 hover:text-[#FE652D] ${isActive(link.path) ? 'nav-link-active' : ''}`} aria-current={isActive(link.path) ? 'page' : undefined}>
-                                                {link.name}
-                                                <span className="nav-dot" />
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                                <span className="effect filter" ref={filterRef} />
-                            </div>
-                        </div>
-
-                        <div className="flex items-center space-x-3">
-                            {/* ✅ 2. Bouton Recherche connecté */}
-                            <button
-                                onClick={onOpenSearch}
-                                className="relative p-2 text-white hover:text-[#FE652D] transition-all duration-300 rounded-full group cursor-pointer"
-                                aria-label="Rechercher"
-                            >
-                                <IoSearchSharp className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
-                                <span className="icon-dot" />
-                            </button>
-
-                            {/* ✅ 3. Bouton Panier connecté avec badge */}
-                            <button
-                                onClick={onOpenCart}
-                                className="relative p-2 text-white hover:text-[#FE652D] transition-all duration-300 rounded-full group cursor-pointer"
-                                aria-label="Voir le panier"
-                            >
-                                <FaShoppingCart className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
-                                {cartCount > 0 && (
-                                    <span className="absolute -top-1 -right-1 bg-[#FE652D] text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-stone-950 animate-bounce-short">
-                                        {cartCount}
-                                    </span>
-                                )}
-                                <span className="icon-dot" />
-                            </button>
-
-                            <Link to="/reservation" className="relative overflow-hidden bg-[#FE652D] text-white font-medium py-2.5 px-5 rounded-md shadow-md hover:shadow-lg transition-all duration-300 text-sm tracking-wide group flex items-center gap-2">
-                                <MdRestaurantMenu className="h-4 w-4" />
-                                <span className="relative z-10">Réserver</span>
-                                <span className="absolute inset-0 bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-                            </Link>
-                        </div>
+                    {/* ACTIONS DESKTOP */}
+                    <div className="hidden lg:flex items-center space-x-3">
+                        <button onClick={onOpenSearch} className="relative p-2 text-white hover:text-[#FE652D] transition-all duration-300 rounded-full group cursor-pointer" aria-label="Rechercher">
+                            <IoSearchSharp className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+                            <span className="icon-dot" />
+                        </button>
+                        <button onClick={onOpenCart} className="relative p-2 text-white hover:text-[#FE652D] transition-all duration-300 rounded-full group cursor-pointer" aria-label="Voir le panier">
+                            <FaShoppingCart className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+                            {cartCount > 0 && (
+                                <span className="absolute -top-1 -right-1 bg-[#FE652D] text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-stone-950 animate-bounce-short">
+                                    {cartCount}
+                                </span>
+                            )}
+                            <span className="icon-dot" />
+                        </button>
+                        <Link to="/reservation" className="relative overflow-hidden bg-[#FE652D] text-white font-medium py-2.5 px-5 rounded-md shadow-md hover:shadow-lg transition-all duration-300 text-sm tracking-wide group flex items-center gap-2">
+                            <MdRestaurantMenu className="h-4 w-4" />
+                            <span className="relative z-10">Réserver</span>
+                            <span className="absolute inset-0 bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+                        </Link>
                     </div>
-                </nav>
 
-                                {/* MENU MOBILE (StaggeredMenu) */}
-                <div className="lg:hidden">
-                    <StaggeredMenu
-                        position="right"
-                        colors={['#FE652D', '#ff8a5c', '#ffffff']}
-                        items={menuItems}
-                        displaySocials={false}
-                        displayItemNumbering={true}
-                        logoUrl={logo}
-                        menuButtonColor={isScrolled ? "#FE652D" : "#FE652D"}
-                        openMenuButtonColor="#FE652D"
-                        accentColor="#FE652D"
-                        isFixed={true} /* ✅ Important : empêche le menu de cacher le reste de la page */
-                        changeMenuColorOnOpen={true}
-                        closeOnClickAway={true}
-                        onOpenCart={onOpenCart}       /* ✅ Connecte le bouton "Mon Panier" du menu mobile */
-                        onOpenSearch={onOpenSearch}   /* ✅ Connecte le bouton "Rechercher" du menu mobile */
-                    />
+                    {/* ✅ MENU MOBILE : Contient UNIQUEMENT le bouton toggle (le header est géré par le parent) */}
+                    <div className="lg:hidden">
+                        <StaggeredMenu
+                            position="right"
+                            colors={['#FE652D', '#ff8a5c', '#ffffff']}
+                            items={menuItems}
+                            displaySocials={false}
+                            displayItemNumbering={true}
+                            accentColor="#FE652D"
+                            closeOnClickAway={true}
+                            onOpenCart={onOpenCart}
+                            onOpenSearch={onOpenSearch}
+                        />
+                    </div>
                 </div>
             </header>
         </>

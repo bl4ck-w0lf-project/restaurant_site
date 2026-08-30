@@ -339,7 +339,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                                         <Link
                                             to={it.link}
                                             onClick={closeMenu}
-                                            className="sm-panel-item relative text-[#111111] my-3 font-semibold text-[2.5rem] md:text-[4rem] cursor-pointer leading-none tracking-[-1px] md:tracking-[-2px] uppercase transition-colors duration-150 ease-linear inline-block no-underline pr-[1.4em] hover:text-[#FE652D] focus:outline-none focus:text-[#FE652D]"
+                                            className="sm-panel-item relative text-[#111111] my-5 font-semibold text-[2.5rem] md:text-[4rem] cursor-pointer leading-none tracking-[-1px] md:tracking-[-2px] uppercase transition-colors duration-150 ease-linear inline-block no-underline pr-[1.4em] hover:text-[#FE652D] focus:outline-none focus:text-[#FE652D]"
                                             aria-label={it.ariaLabel}
                                             data-index={idx + 1}
                                         >
