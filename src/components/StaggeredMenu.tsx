@@ -27,8 +27,8 @@ export interface StaggeredMenuProps {
     closeOnClickAway?: boolean;
     onMenuOpen?: () => void;
     onMenuClose?: () => void;
-    onOpenCart?: () => void;       // ✅ AJOUTÉ
-    onOpenSearch?: () => void;     // ✅ AJOUTÉ
+    onOpenCart?: () => void;       //  AJOUTÉ
+    onOpenSearch?: () => void;     //  AJOUTÉ
 }
 
 export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
@@ -47,13 +47,13 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     closeOnClickAway = true,
     onMenuOpen,
     onMenuClose,
-    onOpenCart,       // ✅ AJOUTÉ
-    onOpenSearch      // ✅ AJOUTÉ
+    onOpenCart,       //  AJOUTÉ
+    onOpenSearch      //  AJOUTÉ
 }: StaggeredMenuProps) => {
     const [open, setOpen] = useState(false);
     const openRef = useRef(false);
 
-    // ✅ AJOUT : Gestion du scroll pour le header
+    //  AJOUT : Gestion du scroll pour le header
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -286,7 +286,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     }, [closeOnClickAway, open, closeMenu]);
 
     return (
-        // ✅ CORRECTION : suppression de 'overflow-hidden' et 'fixed' agressif qui cachait la page
+        //  CORRECTION : suppression de 'overflow-hidden' et 'fixed' agressif qui cachait la page
         <div className="sm-scope fixed top-0 left-0 inset-0 z-[9999]  pointer-events-none">
             <div
                 className={(className ? className + ' ' : '') + 'staggered-menu-wrapper pointer-events-none relative w-full h-full z-40'}
@@ -305,13 +305,13 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                 </div>
 
                 <header
-                    className={`staggered-menu-header fixed right-0 top-0 left-0 w-full flex items-center justify-between px-5 py-3 md:p-[1em] transition-all duration-300 pointer-events-none z-50 ${isScrolled
-                            ? 'bg-stone-800/90 backdrop-blur-md shadow-lg'
-                            : ' backdrop-blur-sm'
+                    className={`staggered-menu-header fixed right-0 top-0 left-0 w-full flex items-center justify-between px-5 py-3 mb-3 md:p-[1em] transition-all duration-300 pointer-events-none z-50 ${isScrolled
+                        ? 'bg-stone-800/90 backdrop-blur-md shadow-lg'
+                        : ' backdrop-blur-sm'
                         }`}
                     aria-label="Main navigation header"
                 >  <div className="sm-logo flex items-center select-none pointer-events-auto" aria-label="Logo">
-                        <img src="https://website-foodie-restaurant.vercel.app/assets/logo.png" alt="Logo" className="sm-logo-img block h-20 md:h-20 w-auto object-contain" draggable={false} />
+                        <img src="src/assets/logo.png" alt="Logo" className="sm-logo-img block h-20 md:h-20 w-auto object-contain" draggable={false} />
                     </div>
 
                     <div className="flex items-center gap-3 md:gap-4 pointer-events-auto">
@@ -373,7 +373,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                             )}
                         </ul>
 
-                        {/* ✅ BOUTONS CONNECTÉS AUX COMPOSANTS GLOBAUX */}
+                        {/*  BOUTONS CONNECTÉS AUX COMPOSANTS GLOBAUX */}
                         <div className="mt-auto pt-8 flex flex-col gap-4 border-t border-stone-200">
                             <button
                                 onClick={() => {
@@ -462,8 +462,31 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                 .sm-scope .sm-panel-item:focus-visible { color: #FE652D; outline: none; }
                 .sm-scope .sm-panel-itemLabel { display: inline-block; will-change: transform; transform-origin: 50% 100%; }
                 .sm-scope .sm-panel-list[data-numbering] { counter-reset: smItem; }
-                .sm-scope .sm-panel-list[data-numbering] .sm-panel-item::after { counter-increment: smItem; content: counter(smItem, decimal-leading-zero); position: absolute; top: 0.1em; right: 3.2em; font-size: 18px; font-weight: 400; color: var(--sm-accent, #FE652D); pointer-events: none; user-select: none; opacity: var(--sm-num-opacity, 0); }
-                @media (max-width: 1024px) { .sm-scope .staggered-menu-panel, .sm-scope .sm-prelayers { width: 100%; left: 0; right: 0; } }
+                .sm-scope .sm-panel-list[data-numbering] .sm-panel-item::after { 
+                    counter-increment: smItem; 
+                    content: counter(smItem, decimal-leading-zero); 
+                    position: absolute; 
+                    top: 0.1em; 
+                    right: 0.5em; 
+                    font-size: 30px; 
+                    font-weight: 400; 
+                    color: var(--sm-accent, #FE652D); 
+                    pointer-events: none; 
+                    user-select: none; 
+                    opacity: var(--sm-num-opacity, 0); 
+                }
+                @media (min-width: 640px) { 
+                    .sm-scope .sm-panel-list[data-numbering] .sm-panel-item::after { 
+                        right: 0.5em; 
+                        font-size: 30px; 
+                    } 
+                }
+                @media (min-width: 768px) { 
+                    .sm-scope .sm-panel-list[data-numbering] .sm-panel-item::after { 
+                        right: 1.2em; 
+                        font-size: 35px; 
+                    } 
+                }  @media (max-width: 1024px) { .sm-scope .staggered-menu-panel, .sm-scope .sm-prelayers { width: 100%; left: 0; right: 0; } }
             `}</style>
         </div>
     );

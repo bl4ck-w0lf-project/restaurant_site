@@ -1,11 +1,11 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Leaf, Calendar, Users, ShieldCheck, Utensils,
   Plus, Minus, ArrowRight
 } from 'lucide-react';
 import { FaInstagram, FaFacebook } from 'react-icons/fa';
-import { MenuMeals } from '../data/MenuMeals'; 
+import { MenuMeals } from '../data/MenuMeals';
 import WebThreads from '../components/WebThreads';
 
 // ==========================================
@@ -99,44 +99,44 @@ export default function About() {
       {/* 1. HERO À PROPOS */}
       {/* ========================================== */}
       <section className="relative min-h-[70vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden pt-20">
-       
+
         <div className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=1000"
-          alt="Accueil du restaurant"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-stone-950/85 via-stone-900/80 to-black/80" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.3)_100%)]" />
-      </div>
+          <img
+            src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=1000"
+            alt="Accueil du restaurant"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-stone-950/85 via-stone-900/80 to-black/80" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.3)_100%)]" />
+        </div>
 
 
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
-        className="relative z-10 text-center text-white px-6 max-w-4xl"
-      >
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="inline-flex items-center gap-2 mb-6 px-5 py-2 rounded-full border border-[#FE652D]/40 bg-white/5 backdrop-blur-sm"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
+          className="relative z-10 text-center text-white px-6 max-w-4xl"
         >
-          <span className="font-montserrat text-xs font-medium tracking-[0.3em] uppercase text-white/90">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="inline-flex items-center gap-2 mb-6 px-5 py-2 rounded-full border border-[#FE652D]/40 bg-white/5 backdrop-blur-sm"
+          >
+            <span className="font-montserrat text-xs font-medium tracking-[0.3em] uppercase text-white/90">
               Notre Univers
-          </span>
+            </span>
+          </motion.div>
+
+          <h1 className="font-syne text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[0.95] tracking-tight">
+            L'histoire derrière chaque  <br />
+            <span className="italic text-[#FE652D]">assiette.</span>
+          </h1>
+
+          <p className="font-outfit text-stone-200 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
+            Plus qu'un restaurant, un lieu de rencontre entre la terre, le savoir-faire et l'émotion.
+          </p>
         </motion.div>
-
-        <h1 className="font-syne text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[0.95] tracking-tight">
-          L'histoire derrière chaque  <br />
-          <span className="italic text-[#FE652D]">assiette.</span>
-        </h1>
-
-        <p className="font-outfit text-stone-200 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
-              Plus qu'un restaurant, un lieu de rencontre entre la terre, le savoir-faire et l'émotion.
-        </p>
-      </motion.div>
       </section>
 
       <main className="container mx-auto px-6 py-24 md:py-32 max-w-7xl">
@@ -185,11 +185,11 @@ export default function About() {
           </motion.div>
         </section>
 
-                {/* ========================================== */}
+        {/* ========================================== */}
         {/* 3. STATISTIQUES (IMMERSIF PLEINE LARGEUR - SANS OVERLAY) */}
         {/* ========================================== */}
         <section className="relative w-full h-[35vh] min-h-[300px] flex items-center justify-center overflow-hidden my-16">
-          
+
           {/* Arrière-plan animé WebThreads - Pleine largeur, opaque et visible */}
           <div className="absolute inset-0 z-0 w-full h-full">
             <WebThreads
@@ -207,16 +207,16 @@ export default function About() {
               falloff={0.5}
               thickness={1.2}
               brightness={0.3}
-              opacity={1} /* ✅ 100% OPAQUE ET VISIBLE */
+              opacity={1} /*  100% OPAQUE ET VISIBLE */
               mirror={true}
               shimmer={false}
               grain={true}
               grainIntensity={0.03}
               mouseInteraction={true}
               mouseStrength={0.2}
-              backgroundColor="#ffffff" /* ✅ Fond sombre pour faire ressortir les fils orange */
+              backgroundColor="#ffffff" /*  Fond sombre pour faire ressortir les fils orange */
             />
-            {/* ✅ OVERLAY NOIR RETIRÉ COMME DEMANDÉ */}
+            {/*  OVERLAY NOIR RETIRÉ COMME DEMANDÉ */}
           </div>
 
           {/* Contenu des statistiques par-dessus */}
@@ -228,7 +228,7 @@ export default function About() {
                 { value: "36", label: "Plats signature" },
                 { value: "4.9", label: "Note moyenne" }
               ].map((stat, index) => (
-                <motion.div 
+                <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -240,10 +240,10 @@ export default function About() {
                   <div className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight group-hover:text-[#FE652D] transition-colors duration-500 drop-shadow-lg">
                     {stat.value}
                   </div>
-                  
+
                   {/* Petite ligne décorative qui s'étend au survol */}
                   <div className="w-12 h-0.5 bg-[#FE652D]/70 mb-4 group-hover:w-20 group-hover:bg-[#FE652D] transition-all duration-500" />
-                  
+
                   {/* Label avec ombre portée pour la lisibilité */}
                   <div className="text-stone-300 text-sm uppercase tracking-[0.2em] font-medium group-hover:text-white transition-colors duration-500 drop-shadow-md">
                     {stat.label}

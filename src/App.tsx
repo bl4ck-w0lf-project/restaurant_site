@@ -43,7 +43,7 @@ function App() {
         cartCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
       />
 
-      {/* ✅ SOLUTION RADICALE : Ce "pt-20" pousse le contenu sous la navbar fixe. Plus rien ne sera caché. */}
+      {/*  SOLUTION RADICALE : Ce "pt-20" pousse le contenu sous la navbar fixe. Plus rien ne sera caché. */}
       <main className="min-h-screen flex flex-col">
         <div className="flex-grow">
           <Routes>

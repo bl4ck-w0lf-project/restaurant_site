@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
-  ChefHat, Wine, UtensilsCrossed, MapPin, Phone, 
-  Clock, ArrowRight, Star, Award, Fish, Coffee, 
-   Cake, Martini, 
+  ChefHat, Wine, UtensilsCrossed, MapPin, Phone,
+  Clock, ArrowRight, Star, Award, Fish, Coffee,
+  Cake, Martini,
 } from 'lucide-react';
 import { FaInstagram, FaFacebook } from 'react-icons/fa';
 
@@ -14,20 +14,42 @@ import { Link } from 'react-router-dom';
 import { MenuMeals } from '../data/MenuMeals';
 
 
+
 // ==========================================
-// HERO - ORBITAL COMPOSITION (DARK MODE PREMIUM)
+// HERO - ORBITAL COMPOSITION (DARK MODE PREMIUM & RESPONSIVE)
 // ==========================================
 const OrbitalHero = () => {
   const [activeId, setActiveId] = useState(HeroMeals[0]?.id || 1);
   const [rotation, setRotation] = useState(0);
   const activeDish = HeroMeals.find(d => d.id === activeId) || HeroMeals[0];
 
-  // Rotation automatique
+  // ✅ 1. RAYON D'ORBITE DYNAMIQUE (Sécurisé et corrigé)
+  const [orbitRadius, setOrbitRadius] = useState(130); // Valeur par défaut safe (mobile)
+
   useEffect(() => {
+    // Fonction qui met à jour le rayon selon la taille de l'écran
+    const updateRadius = () => {
+      if (window.innerWidth < 640) {
+        setOrbitRadius(230); // Mobile : rayon serré mais visible
+      } else if (window.innerWidth < 1024) {
+        setOrbitRadius(300); // Tablette : rayon moyen (corrigé de 30 à 200)
+      } else {
+        setOrbitRadius(520); // Desktop : rayon large
+      }
+    };
+
+    updateRadius(); // Calcul immédiat et sécurisé au montage du composant
+    window.addEventListener('resize', updateRadius);
+
+    // Rotation automatique
     const interval = setInterval(() => {
       setRotation(prev => (prev + 0.2) % 360);
     }, 50);
-    return () => clearInterval(interval);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('resize', updateRadius);
+    };
   }, []);
 
   const handleDishClick = (id: number) => {
@@ -37,9 +59,7 @@ const OrbitalHero = () => {
   const orbitalDishes = HeroMeals.filter(d => d.id !== activeId);
 
   return (
-    // ✅ FOND DARK MODE ÉLÉGANT
-    <section className="relative min-h-screen flex items-center pt-32 pb-12 overflow-hidden bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950">
-
+    <section className="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950">
       {/* ===== BACKGROUND DÉTAILS CULINAIRES (BLANC SUBTIL) ===== */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-20 left-10 rotate-12 text-white/10"><UtensilsCrossed size={140} strokeWidth={1} /></div>
@@ -58,7 +78,7 @@ const OrbitalHero = () => {
         <div className="absolute bottom-[20%] left-[30%] w-6 h-6 rounded-full bg-[#FE652D]/10 blur-sm" />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
 
           {/* ===== PARTIE GAUCHE : ÉDITORIAL ===== */}
@@ -66,15 +86,15 @@ const OrbitalHero = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex-1 text-center lg:text-left"
+            className="flex-1 text-center lg:text-left w-full"
           >
             <div className="inline-block mb-6 px-4 py-1.5 border border-[#FE652D]/30 rounded-full bg-white/5 backdrop-blur-sm">
               <span className="text-[#FE652D] text-xs font-medium tracking-[0.3em] uppercase">Gastronomie étoilée</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-montserrat text-white leading-[0.95] mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-montserrat text-white leading-[1.1] lg:leading-[0.95] mb-6 lg:mb-8">
               L'ART DE LA <br />
-              <span className="inline-block mt-2">
+              <span className="inline-block mt-1 lg:mt-2">
                 <EchoText
                   text="PASSION"
                   color="#FE652D"
@@ -91,17 +111,16 @@ const OrbitalHero = () => {
               <br /> CULINAIRE
             </h1>
 
-            <p className="text-stone-400 text-lg md:text-xl max-w-md mx-auto lg:mx-0 mb-10 text-syne font-light">
+            <p className="text-stone-400 text-base sm:text-lg md:text-xl max-w-md mx-auto lg:mx-0 mb-8 lg:mb-10 text-syne font-light">
               Une expérience gastronomique contemporaine où chaque ingrédient raconte une histoire, dans un cadre d'exception.
             </p>
 
-            {/* ✅ BOUTONS LIENS VERS LES PAGES CORRESPONDANTES */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link to="/reservation" className="w-full sm:w-auto">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-[#FE652D] text-white px-8 py-4 rounded-xl font-medium tracking-wide shadow-lg shadow-[#FE652D]/30 hover:shadow-[#FE652D]/50 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="bg-[#FE652D] text-white px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl font-medium tracking-wide shadow-lg shadow-[#FE652D]/30 hover:shadow-[#FE652D]/50 transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   Réserver une table <ArrowRight size={18} />
                 </motion.div>
@@ -111,19 +130,19 @@ const OrbitalHero = () => {
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="border-2 border-white/20 text-white px-8 py-4 rounded-xl font-medium tracking-wide hover:bg-white/5 hover:border-[#FE652D] hover:text-[#FE652D] transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="border-2 border-white/20 text-white px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl font-medium tracking-wide hover:bg-white/5 hover:border-[#FE652D] hover:text-[#FE652D] transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   Découvrir le menu <ArrowRight size={18} />
                 </motion.div>
               </Link>
             </div>
 
-            <div className="flex flex-wrap items-center gap-6 mt-10 justify-center lg:justify-start text-sm text-stone-400">
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6 mt-8 lg:mt-10 justify-center lg:justify-start text-xs sm:text-sm text-stone-400">
               <div className="flex items-center gap-2">
                 <Star className="w-4 h-4 text-[#FE652D] fill-[#FE652D]" />
                 <span>Étoilé Michelin</span>
               </div>
-              <div className="w-px h-4 bg-stone-700" />
+              <div className="w-px h-4 bg-stone-700 hidden sm:block" />
               <div className="flex items-center gap-2">
                 <ChefHat className="w-4 h-4 text-[#FE652D]" />
                 <span>Chef étoilé</span>
@@ -132,23 +151,25 @@ const OrbitalHero = () => {
           </motion.div>
 
           {/* ===== PARTIE DROITE : ORBITAL INTERACTIF ===== */}
+          {/* ✅ 2. CONTENEUR STABLE : min-h garantit que l'orbite ne s'écrase pas sur mobile */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="flex-1 relative w-full max-w-2xl aspect-square flex items-center justify-center"
+            className="flex-1 relative w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl aspect-square min-h-[400px] sm:min-h-[500px] flex items-center justify-center"
           >
             {/* Orbites adaptées au dark mode */}
             <div className="absolute inset-0 border border-white/10 rounded-full scale-[0.95] opacity-50" />
             <div className="absolute inset-0 border border-dashed border-white/20 rounded-full scale-[0.75] opacity-60 animate-[spin_80s_linear_infinite]" />
 
             {/* ===== PLAT CENTRAL ===== */}
+            {/* ✅ 3. TAILLES RESPONSIVES : Plus petit sur mobile, progressif vers desktop */}
             <motion.div
               key={`center-${activeId}`}
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="relative z-20 w-72 h-72 md:w-96 md:h-96 overflow-hidden rounded-2xl cursor-default group shadow-2xl shadow-black/50"
+              className="relative z-20 w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-96 lg:h-96 overflow-hidden rounded-2xl cursor-default group shadow-2xl shadow-black/50"
             >
               <img
                 src={activeDish.img}
@@ -157,15 +178,14 @@ const OrbitalHero = () => {
               />
 
               {/* Cadre de texte (Glassmorphism Dark) */}
-              <div className="absolute bottom-4 left-4 right-4 p-4 bg-stone-900/80 backdrop-blur-md rounded-xl border border-white/10 shadow-lg">
-                <h3 className="text-white font-serif text-xl md:text-2xl leading-none">{activeDish.name}</h3>
-                <p className="text-stone-400 text-sm mt-2 font-light">{activeDish.description}</p>
+              <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 p-2 sm:p-4 bg-stone-900/80 backdrop-blur-md rounded-lg sm:rounded-xl border border-white/10 shadow-lg">
+                <h3 className="text-white font-serif text-sm sm:text-xl md:text-2xl leading-none">{activeDish.name}</h3>
+                <p className="text-stone-400 text-[10px] sm:text-sm mt-1 sm:mt-2 font-light line-clamp-2">{activeDish.description}</p>
               </div>
             </motion.div>
 
             {/* ===== PLATS ORBITAUX ===== */}
             {orbitalDishes.map((dish, index) => {
-              const orbitRadius = 320;
               const angle = (index / orbitalDishes.length) * 2 * Math.PI + (rotation * Math.PI / 180);
               const x = Math.cos(angle) * orbitRadius;
               const y = Math.sin(angle) * orbitRadius;
@@ -173,18 +193,19 @@ const OrbitalHero = () => {
               return (
                 <motion.div
                   key={dish.id}
-                  initial={{ scale: 0.6, opacity: 0 }}
-                  animate={{ x, y, scale: 0.65, opacity: 0.9 }}
-                  whileHover={{ scale: 0.8, opacity: 1, zIndex: 30 }}
+                  initial={{ scale: 0.4, opacity: 0 }}
+                  animate={{ x, y, scale: 0.7, opacity: 0.9 }} // Scale de base plus petit pour mobile
+                  whileHover={{ scale: 0.9, opacity: 1, zIndex: 30 }}
                   onClick={() => handleDishClick(dish.id)}
-                  className="absolute w-28 h-28 md:w-36 md:h-36 rounded-2xl overflow-hidden shadow-xl cursor-pointer z-10 border-2 border-white/20"
+                  // ✅ 4. TAILLES DES SPLATS RESPONSIVES
+                  className="absolute w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-xl overflow-hidden shadow-xl cursor-pointer z-10 border border-white/20 sm:border-2"
                 >
                   <img
                     src={dish.img}
                     alt={dish.name}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-black/20 hover:bg-black/0 transition-all duration-300" />
+                  <div className="absolute inset-0 bg-black/30 hover:bg-black/0 transition-all duration-300" />
                 </motion.div>
               );
             })}
@@ -263,12 +284,12 @@ const MenuSection = () => {
   ];
 
   const SectionTitle = ({ children, subtitle }: { children: React.ReactNode, subtitle?: string }) => (
-  <div className="mb-12 text-center">
-    {subtitle && <span className="text-[#FE652D] font-medium tracking-[0.3em] text-sm uppercase mb-4 block">{subtitle}</span>}
-    <h2 className="text-4xl md:text-5xl font-serif text-[#FE652D]">{children}</h2>
-    <div className="w-16 h-0.5 bg-[#FE652D] mx-auto mt-6" />
-  </div>
-);
+    <div className="mb-12 text-center">
+      {subtitle && <span className="text-[#FE652D] font-medium tracking-[0.3em] text-sm uppercase mb-4 block">{subtitle}</span>}
+      <h2 className="text-4xl md:text-5xl font-serif text-[#FE652D]">{children}</h2>
+      <div className="w-16 h-0.5 bg-[#FE652D] mx-auto mt-6" />
+    </div>
+  );
 
   return (
     <section className="py-16 bg-[#120F17]">
@@ -381,7 +402,7 @@ const ReservationSection = () => (
         </div>
       </div>
 
-      {/* ✅ BOUTON CORRIGÉ : 100% VISIBLE ET REDIRECTION ACTIVE */}
+      {/*  BOUTON CORRIGÉ : 100% VISIBLE ET REDIRECTION ACTIVE */}
       <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
@@ -443,10 +464,10 @@ const ContactSection = () => (
           </div>
         </div>
         <div className="bg-stone-800/50 rounded-2xl h-[450px] flex items-center justify-center relative overflow-hidden border border-white/5">
-          <img 
-            src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=800" 
-            alt="Carte" 
-            className="absolute inset-0 w-full h-full object-cover opacity-60" 
+          <img
+            src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=800"
+            alt="Carte"
+            className="absolute inset-0 w-full h-full object-cover opacity-60"
           />
           <div className="relative z-10 bg-stone-900/90 backdrop-blur-sm p-6 rounded-xl shadow-lg text-center max-w-xs border border-white/10">
             <MapPin className="w-6 h-6 text-[#FE652D] mx-auto mb-2" />
