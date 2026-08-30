@@ -30,9 +30,9 @@ const OrbitalHero = () => {
     // Fonction qui met à jour le rayon selon la taille de l'écran
     const updateRadius = () => {
       if (window.innerWidth < 360) {
-        setOrbitRadius(30); // Mobile : rayon serré mais visible
+        setOrbitRadius(130); // Mobile : rayon serré mais visible
       } else if (window.innerWidth < 640) {
-        setOrbitRadius(30); // Tablette : rayon moyen (corrigé de 30 à 200)
+        setOrbitRadius(180); // Tablette : rayon moyen (corrigé de 30 à 200)
       }
       else if (window.innerWidth < 1024) {
         setOrbitRadius(300); // Tablette : rayon moyen (corrigé de 30 à 200)
@@ -201,7 +201,7 @@ const OrbitalHero = () => {
                   whileHover={{ scale: 0.9, opacity: 1, zIndex: 30 }}
                   onClick={() => handleDishClick(dish.id)}
                   // ✅ 4. TAILLES DES SPLATS RESPONSIVES
-                  className="absolute w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-xl overflow-hidden shadow-xl cursor-pointer z-10 border border-white/20 sm:border-2"
+                  className="absolute w-[150px] h-[150px] sm:w-40 sm:h-40 md:w-50 md:h-50 lg:w-42 lg:h-42 rounded-xl overflow-hidden shadow-xl cursor-pointer z-10 border border-white/20 sm:border-2"
                 >
                   <img
                     src={dish.img}
