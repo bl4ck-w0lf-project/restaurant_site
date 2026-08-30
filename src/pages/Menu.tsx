@@ -99,7 +99,7 @@ export default function MenuPage({ onAddToCart }: MenuPageProps) {
               className="w-full h-full object-cover scale-105"
             />
             {/* Overlay identique au Hero pour que l'image ressorte bien */}
-            <div className="absolute inset-0 bg-stone-950/60" />
+            <div className="absolute inset-0 bg-stone-950/80" />
             {/* Vignettage subtil pour focaliser l'attention au centre et faire "pop" le glassmorphism */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.5)_100%)]" />
           </div>

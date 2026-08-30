@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import { IoSearchSharp } from 'react-icons/io5';
+import logoUrl from '../assets/logo.png';
 
 export interface StaggeredMenuItem {
     label: string;

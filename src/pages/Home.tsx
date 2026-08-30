@@ -14,10 +14,6 @@ import { Link } from 'react-router-dom';
 import { MenuMeals } from '../data/MenuMeals';
 
 
-
-
-
-
 // ==========================================
 // HERO - ORBITAL COMPOSITION (DARK MODE PREMIUM)
 // ==========================================
@@ -169,7 +165,7 @@ const OrbitalHero = () => {
 
             {/* ===== PLATS ORBITAUX ===== */}
             {orbitalDishes.map((dish, index) => {
-              const orbitRadius = 350;
+              const orbitRadius = 320;
               const angle = (index / orbitalDishes.length) * 2 * Math.PI + (rotation * Math.PI / 180);
               const x = Math.cos(angle) * orbitRadius;
               const y = Math.sin(angle) * orbitRadius;
