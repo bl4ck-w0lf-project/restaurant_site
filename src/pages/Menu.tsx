@@ -108,8 +108,9 @@ export default function MenuPage({ onAddToCart }: MenuPageProps) {
           <div className="relative z-10 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-10">
 
             {/* ===== COLONNE GAUCHE : FILTRES ===== */}
-            <aside className="w-full lg:w-72 flex-shrink-0">
-              <div className="sticky top-24 bg-white/[0.05] backdrop-blur-xl border border-white/20 boredr-1 rounded-3xl p-5 shadow-2xl shadow-black/40">
+                        {/* ===== COLONNE GAUCHE : FILTRES ===== */}
+            <aside className="w-full lg:w-72 flex-shrink-0 self-start">
+              <div className="sticky top-24 lg:top-28 bg-white/[0.05] backdrop-blur-xl border border-white/20 rounded-3xl p-5 shadow-2xl shadow-black/40">
                 
                 <div className="mb-6 pb-4 border-b border-white/10 flex items-center justify-between">
                   <span className="text-stone-400 text-xs uppercase tracking-widest font-medium">Total</span>

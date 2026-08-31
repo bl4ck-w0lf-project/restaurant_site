@@ -15,14 +15,14 @@ export const HeroMeals: HeroMealItem[] = [
     {
         id: 1,
         name: "Tartare de Saumon",
-        img: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&q=80&w=600",
+        img: "/src/assets/saumon.png",
         category: "entree",
         description: "Saumon frais, avocat, mangue, vinaigrette yuzu"
     },
     {
         id: 2,
         name: "Foie Gras Mi-cuit",
-        img: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&q=80&w=600",
+        img: "/src/assets/salade.png",
         category: "entree",
         description: "Foie gras, chutney de figues, pain d'épices toasté"
     },
@@ -33,14 +33,14 @@ export const HeroMeals: HeroMealItem[] = [
     {
         id: 3,
         name: "Filet de Bœuf",
-        img: "https://images.unsplash.com/photo-1666013942517-4e697f20e9ec?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        img: "/src/assets/filetmeat.png",
         category: "plat_principal",
         description: "Filet de bœuf maturé, sauce truffe noire, purée de céleri"
     },
     {
         id: 4,
         name: "Homard Bleu",
-        img: "https://images.unsplash.com/photo-1551248429-40975aa4de74?auto=format&fit=crop&q=80&w=600",
+        img: "/src/assets/homardblue.png",
         category: "plat_principal",
         description: "Homard bleu, beurre blanc, légumes de saison"
     },
@@ -51,7 +51,7 @@ export const HeroMeals: HeroMealItem[] = [
     {
         id: 5,
         name: "Sphère Chocolat",
-        img: "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?auto=format&fit=crop&q=80&w=600",
+        img: "/src/assets/dessert.png",
         category: "dessert",
         description: "Chocolat grand cru, framboise, croustillant praliné"
     },
@@ -62,7 +62,7 @@ export const HeroMeals: HeroMealItem[] = [
     {
         id: 6,
         name: "Champagne Brut",
-        img: "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&q=80&w=600",
+        img: "/src/assets/montagnecake.png",
         category: "boisson",
         description: "Champagne Grand Cru, millésime 2015"
     }

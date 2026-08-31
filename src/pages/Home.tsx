@@ -12,6 +12,7 @@ import MagicBento from '../components/MagicBento';
 import { HeroMeals } from '../data/HeroMeals';
 import { Link } from 'react-router-dom';
 import { MenuMeals } from '../data/MenuMeals';
+import { RiTeamLine } from "react-icons/ri";
 
 
 
@@ -150,6 +151,11 @@ const OrbitalHero = () => {
                 <ChefHat className="w-4 h-4 text-[#FE652D]" />
                 <span>Chef étoilé</span>
               </div>
+               <div className="w-px h-4 bg-stone-700 hidden sm:block" />
+              <div className="flex items-center gap-2">
+                <RiTeamLine className="w-4 h-4 text-[#FE652D]" />
+                <span>Équipe Expert</span>
+              </div>
             </div>
           </motion.div>
 
@@ -172,18 +178,18 @@ const OrbitalHero = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="relative z-20 w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-96 lg:h-96 overflow-hidden rounded-2xl cursor-default group shadow-2xl shadow-black/50"
+              className="relative z-20  overflow-hidden  cursor-pointer group "
             >
               <img
                 src={activeDish.img}
                 alt={activeDish.name}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-50 h-50 md:w-full md:h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
 
               {/* Cadre de texte (Glassmorphism Dark) */}
-              <div className="hidden md:block absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 p-2 sm:p-4 bg-stone-900/80 backdrop-blur-md rounded-lg sm:rounded-xl border border-white/10 shadow-lg">
-                <h3 className="text-white font-serif text-sm sm:text-xl md:text-2xl leading-none">{activeDish.name}</h3>
-                <p className="text-stone-400 text-[10px] sm:text-sm mt-1 sm:mt-2 font-light line-clamp-2">{activeDish.description}</p>
+              <div className="hidden md:block absolute bottom-5 left-1/2 -translate-x-1/2 w-[75%] p-2 sm:p-4 bg-stone-900/80 backdrop-blur-md rounded-lg sm:rounded-xl border border-white/10 shadow-lg">
+                <h3 className="text-white font-serif text-sm sm:text-xl md:text-2xl leading-none text-center">{activeDish.name}</h3>
+                <p className="text-stone-400 text-[10px] sm:text-sm mt-1 sm:mt-2 font-light line-clamp-2 text-center">{activeDish.description}</p>
               </div>
             </motion.div>
 
@@ -201,14 +207,14 @@ const OrbitalHero = () => {
                   whileHover={{ scale: 0.9, opacity: 1, zIndex: 30 }}
                   onClick={() => handleDishClick(dish.id)}
                   //  4. TAILLES DES SPLATS RESPONSIVES
-                  className="absolute w-[150px] h-[150px] sm:w-40 sm:h-40 md:w-50 md:h-50 lg:w-42 lg:h-42 rounded-xl overflow-hidden shadow-xl cursor-pointer z-10 border border-white/20 sm:border-2"
+                  className="absolute w-[150px] h-[150px] sm:w-30 sm:h-30 md:w-50 md:h-50 lg:w-50 lg:h-50 overflow-hidden cursor-pointer z-10"
                 >
                   <img
                     src={dish.img}
                     alt={dish.name}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-black/30 hover:bg-black/0 transition-all duration-300" />
+                  <div className="absolute inset-0 transition-all duration-300" />
                 </motion.div>
               );
             })}
@@ -426,14 +432,15 @@ const ReservationSection = () => (
     </motion.div>
   </section>
 );
-
 // ==========================================
-// CONTACT SECTION - DARK MODE
+// CONTACT SECTION - DARK MODE (AVEC BADGE COMME ABOUT)
 // ==========================================
 const ContactSection = () => (
   <section className="py-24 bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950">
     <div className="container mx-auto px-6">
       <div className="grid md:grid-cols-2 gap-16">
+
+        {/* ===== PARTIE GAUCHE : TEXTE ===== */}
         <div>
           <span className="text-[#FE652D] font-medium tracking-[0.3em] text-sm uppercase mb-4 block">Contact</span>
           <h2 className="text-4xl font-serif text-white mb-8">Nous trouver</h2>
@@ -466,23 +473,50 @@ const ContactSection = () => (
             </a>
           </div>
         </div>
-        <div className="bg-stone-800/50 rounded-2xl h-[450px] flex items-center justify-center relative overflow-hidden border border-white/5">
-          <img
-            src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=800"
-            alt="Carte"
-            className="absolute inset-0 w-full h-full object-cover opacity-60"
-          />
-          <div className="relative z-10 bg-stone-900/90 backdrop-blur-sm p-6 rounded-xl shadow-lg text-center max-w-xs border border-white/10">
-            <MapPin className="w-6 h-6 text-[#FE652D] mx-auto mb-2" />
-            <p className="font-serif text-xl text-white mb-2">Au cœur de Paris</p>
-            <p className="text-stone-400 text-sm">À 2 min du métro Concorde</p>
+
+        {/* ===== PARTIE DROITE : IMAGE AVEC BADGE COMME ABOUT ===== */}
+        <div className="relative">
+          {/* Cadre décoratif en haut à gauche */}
+          <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-[#FE652D] z-10" />
+
+          {/* Image */}
+          <div className="bg-stone-800/50 rounded-2xl h-[450px] flex items-center justify-center relative overflow-hidden border border-white/5">
+            <img
+              src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=800"
+              alt="Carte"
+              className="absolute inset-0 w-full h-full object-cover opacity-60"
+            />
+          </div>
+
+          {/* Cadre décoratif en bas à droite */}
+          <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-[#FE652D] z-10" />
+
+          {/* ===== BADGE - COMME ÉTOILE MICHELIN DANS ABOUT ===== */}
+          <div className={`
+              absolute 
+              -bottom-12 -right-6 
+              md:-bottom-6 md:-right-6 
+              left-1/2 md:left-auto 
+              -translate-x-1/2 md:translate-x-0 
+              bg-stone-800/90 backdrop-blur-sm shadow-2xl rounded-xl p-4 
+              flex items-center gap-3 border border-white/10 z-20
+              w-[calc(50%-2rem)] md:w-auto
+              justify-center md:justify-start
+            `}>
+            <div className="w-12 h-12 rounded-full bg-[#FE652D]/20 flex items-center justify-center shrink-0">
+              <MapPin className="w-6 h-6 text-[#FE652D]" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-white">Au cœur de Paris</p>
+              <p className="text-xs text-stone-400">À 2 min du métro</p>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 );
-
 
 // ==========================================
 // COMPOSANT PRINCIPAL
