@@ -5,3 +5,11 @@ html, body {
   background-color: #0c0a09; /* Force la couleur stone-950 partout */
   overscroll-behavior-y: none; /* Bloque l'effet élastique blanc sur mobile */
 }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Safari et Chrome */
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE et Edge */
+  scrollbar-width: none; /* Firefox */
+}

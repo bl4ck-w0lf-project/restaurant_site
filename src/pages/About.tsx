@@ -92,7 +92,7 @@ export default function About() {
   const signatureDish = MenuMeals.find(m => m.category === 'plat_principal') || MenuMeals[2];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 text-stone-200">
+    <div className="min-h-screen bg-stone-450/50 text-stone-200 font-sans selection:bg-[#FE652D] selection:text-white">
       {/* <Navbar /> */}
 
       {/* ========================================== */}
@@ -409,6 +409,7 @@ export default function About() {
         {/* ========================================== */}
         {/* 5. FAQ & IMAGE PLAT */}
         {/* ========================================== */}
+
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-32">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -439,13 +440,13 @@ export default function About() {
             className="relative lg:sticky lg:top-32"
           >
             <img
-              src={signatureDish.img}
-              alt={signatureDish.name}
+              src="/filetmeat.png"
+              alt="Plat gastronomique"
               className="w-full h-[500px] md:h-[600px] object-cover rounded-2xl shadow-2xl shadow-black/50"
             />
             <div className="absolute bottom-6 left-6 right-6 p-6 bg-stone-950/80 backdrop-blur-md rounded-xl border border-stone-800/50">
               <p className="text-[#FE652D] text-xs font-bold uppercase tracking-wider mb-1">Le coup de cœur du Chef</p>
-              <h3 className="text-white font-serif text-2xl">{signatureDish.name}</h3>
+              <h3 className="text-white font-serif text-2xl">Notre signature gastronomique</h3>
             </div>
           </motion.div>
         </section>

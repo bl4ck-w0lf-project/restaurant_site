@@ -256,64 +256,7 @@ const Contact: React.FC = () => {
         </div>
       </section>
 
-      {/* ========================================== */}
-{/* CARTE INTERACTIVE */}
-{/* ========================================== */}
-{/* <section className="py-16 md:py-20">
-  <div className="container mx-auto px-6 max-w-6xl">
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7 }}
-      className="space-y-6 text-center mb-10"
-    >
-      <span className="text-[#FE652D] font-montserrat text-xs font-medium tracking-[0.3em] uppercase">
-        Nous trouver
-      </span>
-      <h2 className="font-syne text-3xl md:text-4xl font-bold">
-        Où nous <span className="italic text-[#FE652D]">trouver</span>
-      </h2>
-    </motion.div>
-
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7, delay: 0.2 }}
-      className="relative w-full rounded-2xl overflow-hidden shadow-2xl shadow-black/40 border border-white/10"
-      style={{ height: '400px' }}
-    > */}
-      {/* Iframe Google Maps */}
-      {/* <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.991441025335!2d2.292292315674156!3d48.85837360871587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sTour%20Eiffel!5e0!3m2!1sfr!2sfr!4v1695123456789!5m2!1sfr!2sfr"
-        width="100%"
-        height="100%"
-        style={{ border: 0 }}
-        allowFullScreen
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-        title="Carte du restaurant"
-        className="w-full h-full"
-      /> */}
-      
-      {/* Overlay subtil en bas pour le texte */}
-      {/* <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
-        <div className="flex flex-wrap items-center justify-center gap-6 text-white/80">
-          <div className="flex items-center gap-2">
-            <MapPin size={16} className="text-[#FE652D]" />
-            <span className="font-outfit text-sm">12 Avenue de la Gastronomie, 75008 Paris</span>
-          </div>
-          <div className="hidden md:block w-px h-6 bg-white/20" />
-          <div className="flex items-center gap-2">
-            <Phone size={16} className="text-[#FE652D]" />
-            <span className="font-outfit text-sm">+33 1 23 45 67 89</span>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  </div>
-</section> */}
+     
 
 {/* ========================================== */}
 {/* CARTE INTERACTIVE - PLEINE LARGEUR */}

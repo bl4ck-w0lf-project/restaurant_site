@@ -120,7 +120,7 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({
 
                 {/* Résultats */}
                 {searchValue && (
-                  <div className="max-h-[60vh] overflow-y-auto">
+                  <div className="max-h-[60vh] overflow-y-auto scrollbar-hide overscroll-contain">
                     {filteredItems.length === 0 ? (
                       <div className="p-8 text-center">
                         <p className="text-stone-400 text-sm">Aucun plat trouvé</p>

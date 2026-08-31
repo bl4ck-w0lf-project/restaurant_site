@@ -7,21 +7,30 @@
 
 /* ===== BASE ===== */
 @layer base {
+
   /* Titres en Syne */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Syne', sans-serif;
     font-weight: 700;
   }
 
-  
-  html, body {
-  margin: 0 !important;
-  padding: 0 !important;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 400;
-  background-color: #0c0a09; /* Force la couleur stone-950 partout */
-  overscroll-behavior-y: none; /* Bloque l'effet élastique blanc sur mobile */
-}
+
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    background-color: #0c0a09;
+    /* Force la couleur stone-950 partout */
+    overscroll-behavior-y: none;
+    /* Bloque l'effet élastique blanc sur mobile */
+  }
 
   /* Par défaut tout en Outfit */
   * {
@@ -34,7 +43,20 @@
   .font-syne {
     font-family: 'Syne', sans-serif !important;
   }
+
   .font-outfit {
     font-family: 'Outfit', sans-serif !important;
   }
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+  /* Safari et Chrome */
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE et Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }

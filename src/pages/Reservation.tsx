@@ -178,7 +178,7 @@ export default function Reservation() {
         {/* CONTENU PRINCIPAL (2 COLONNES) */}
         {/* ========================================== */}
         <div className="container mx-auto px-6 pb-24 pt-24 md:pb-32 max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-13 lg:gap-20 items-start">
             
             {/* ===== PARTIE GAUCHE : VISUEL & INFO ===== */}
             <motion.div 
@@ -186,16 +186,16 @@ export default function Reservation() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="flex flex-col gap-8"
+              className="flex flex-col gap-10"
             >
               {/* 1. Image du Plat (Grande et immersive) */}
-              <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl shadow-black/50 group">
+              <div className="relative w-full h-ful overflow-hidden group">
                 <img 
-                  src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=1000" 
+                  src="/reservation.png" 
                   alt="Plat signature du restaurant" 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover  aspect[16:9]transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 to-transparent" />
+                <div className="absolute inset-0 " />
               </div>
 
               {/* 2. Description */}
