@@ -15,14 +15,14 @@ export const HeroMeals: HeroMealItem[] = [
     {
         id: 1,
         name: "Tartare de Saumon",
-        img: "/src/assets/saumon.png",
+        img: "/saumon.png",
         category: "entree",
         description: "Saumon frais, avocat, mangue, vinaigrette yuzu"
     },
     {
         id: 2,
         name: "Foie Gras Mi-cuit",
-        img: "/src/assets/salade.png",
+        img: "/salade.png",
         category: "entree",
         description: "Foie gras, chutney de figues, pain d'épices toasté"
     },
@@ -33,14 +33,14 @@ export const HeroMeals: HeroMealItem[] = [
     {
         id: 3,
         name: "Filet de Bœuf",
-        img: "/src/assets/filetmeat.png",
+        img: "/filetmeat.png",
         category: "plat_principal",
         description: "Filet de bœuf maturé, sauce truffe noire, purée de céleri"
     },
     {
         id: 4,
         name: "Homard Bleu",
-        img: "/src/assets/homardblue.png",
+        img: "/homardblue.png",
         category: "plat_principal",
         description: "Homard bleu, beurre blanc, légumes de saison"
     },
@@ -51,7 +51,7 @@ export const HeroMeals: HeroMealItem[] = [
     {
         id: 5,
         name: "Sphère Chocolat",
-        img: "/src/assets/dessert.png",
+        img: "/dessert.png",
         category: "dessert",
         description: "Chocolat grand cru, framboise, croustillant praliné"
     },
@@ -62,7 +62,7 @@ export const HeroMeals: HeroMealItem[] = [
     {
         id: 6,
         name: "Champagne Brut",
-        img: "/src/assets/montagnecake.png",
+        img: "/montagnecake.png",
         category: "boisson",
         description: "Champagne Grand Cru, millésime 2015"
     }
