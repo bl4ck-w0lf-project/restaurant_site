@@ -9,6 +9,7 @@ import Contact from './pages/Contact';
 import Reservation from './pages/Reservation';
 import Error404 from './pages/Error404';
 
+import StaggeredMenu from './components/StaggeredMenu';
 import SearchOverlay from './components/SearchOverlay';
 import CartDrawer, { type CartItem } from './components/CartDrawer';
 import { MenuMeals, type MenuItem } from './data/MenuMeals';
@@ -35,12 +36,21 @@ function App() {
 
   const handleClearCart = () => setCartItems([]);
 
+    // Calcul du nombre total d'articles (utilisé par les deux)
+const totalCartItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);  
+
   return (
     <Router>
       <Navbar
         onOpenCart={() => setIsCartOpen(true)}
         onOpenSearch={() => setIsSearchOpen(true)}
         cartCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
+      />
+
+        <StaggeredMenu
+         className="block md:hidden"
+          cartCount={totalCartItems} // <-- MÊME COMPTEUR
+       
       />
 
       {/*  SOLUTION RADICALE : Ce "pt-20" pousse le contenu sous la navbar fixe. Plus rien ne sera caché. */}
@@ -74,6 +84,7 @@ function App() {
         onRemoveItem={handleRemoveItem}
         onClearCart={handleClearCart}
         onCheckout={() => { console.log('Passage à la caisse'); setIsCartOpen(false); }}
+        cartCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
       />
     </Router>
   );

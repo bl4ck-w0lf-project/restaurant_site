@@ -15,6 +15,7 @@ interface CartDrawerProps {
   onRemoveItem: (id: number) => void;
   onClearCart: () => void;
   onCheckout: () => void;
+  cartCount?: number;
 }
 
 const CartDrawer: React.FC<CartDrawerProps> = ({

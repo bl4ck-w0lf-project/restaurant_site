@@ -28,7 +28,8 @@ export interface StaggeredMenuProps {
     onMenuOpen?: () => void;
     onMenuClose?: () => void;
     onOpenCart?: () => void;       //  AJOUTÉ
-    onOpenSearch?: () => void;     //  AJOUTÉ
+    onOpenSearch?: () => void;
+    cartCount?: number;  //  AJOUTÉ
 }
 
 export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
@@ -48,7 +49,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     onMenuOpen,
     onMenuClose,
     onOpenCart,       //  AJOUTÉ
-    onOpenSearch      //  AJOUTÉ
+    onOpenSearch,
+    cartCount = 0,    //  AJOUTÉ
 }: StaggeredMenuProps) => {
     const [open, setOpen] = useState(false);
     const openRef = useRef(false);
@@ -307,14 +309,45 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                 <header
                     className={`staggered-menu-header fixed right-0 top-0 left-0 w-full flex items-center justify-between px-5 py-3 mb-3 md:p-[1em] transition-all duration-300 pointer-events-none z-50 ${isScrolled
                         ? 'bg-stone-800/90 backdrop-blur-md shadow-lg'
-                        : ' backdrop-blur-sm'
+                        : 'backdrop-blur-sm'
                         }`}
                     aria-label="Main navigation header"
-                >  <div className="sm-logo flex items-center select-none pointer-events-auto" aria-label="Logo">
+                >
+                    <div className="sm-logo flex items-center select-none pointer-events-auto" aria-label="Logo">
                         <img src="/logo.png" alt="Logo" className="sm-logo-img block h-20 md:h-20 w-auto object-contain" draggable={false} />
                     </div>
 
-                    <div className="flex items-center gap-3 md:gap-4 pointer-events-auto">
+                    <div className="flex items-center gap-2 md:gap-3 pointer-events-auto">
+                        {/* BOUTON RECHERCHE */}
+                        <button
+                            onClick={() => {
+                                if (open) closeMenu();
+                                onOpenSearch?.();
+                            }}
+                            className="relative bg-stone-100 text-stone-800 p-2.5 rounded-full hover:bg-stone-200 transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 flex items-center justify-center"
+                            aria-label="Rechercher"
+                        >
+                            <IoSearchSharp className="h-5 w-5" />
+                        </button>
+
+                        {/* BOUTON PANIER */}
+                        <button
+                            onClick={() => {
+                                if (open) closeMenu();
+                                onOpenCart?.();
+                            }}
+                            className="relative bg-[#FE652D] text-white p-2.5 rounded-full hover:bg-[#e55a24] transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 flex items-center justify-center"
+                            aria-label="Ouvrir le panier"
+                        >
+                            <FaShoppingCart className="h-5 w-5" />
+                            {cartCount > 0 && (
+                                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold rounded-full min-w-[20px] h-5 px-1 flex items-center justify-center">
+                                    {cartCount > 99 ? '99+' : cartCount}
+                                </span>
+                            )}
+                        </button>
+
+                        {/* MENU TOGGLE */}
                         <button
                             ref={toggleBtnRef}
                             className="sm-toggle relative inline-flex items-center gap-[0.3rem] bg-transparent border-0 cursor-pointer font-medium leading-none overflow-visible pointer-events-auto transition-colors duration-300"
@@ -374,7 +407,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                         </ul>
 
                         {/*  BOUTONS CONNECTÉS AUX COMPOSANTS GLOBAUX */}
-                        <div className="mt-auto pt-8 flex flex-col gap-4 border-t border-stone-200">
+                        {/* <div className="mt-auto pt-8 flex flex-col gap-4 border-t border-stone-200">
                             <button
                                 onClick={() => {
                                     closeMenu();
@@ -397,7 +430,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                                 <span className="relative z-10 font-semibold">Mon Panier</span>
                                 <span className="absolute inset-0 bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                 </aside>
             </div>
