@@ -63,6 +63,11 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+    const [localCartCount, setLocalCartCount] = useState(cartCount);
+
+    useEffect(() => {
+        setLocalCartCount(cartCount);
+    }, [cartCount]);
 
     const panelRef = useRef<HTMLDivElement | null>(null);
     const preLayersRef = useRef<HTMLDivElement | null>(null);
@@ -197,17 +202,28 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     }, [position]);
 
     const animateIcon = useCallback((opening: boolean) => {
-        const icon = iconRef.current;
         const h = plusHRef.current;
         const v = plusVRef.current;
-        if (!icon || !h || !v) return;
+        const middle = document.getElementById('middle-bar');
+        if (!h || !v) return;
         spinTweenRef.current?.kill();
 
         if (opening) {
-            gsap.set(icon, { rotate: 0, transformOrigin: '50% 50%' });
-            spinTweenRef.current = gsap.timeline({ defaults: { ease: 'power4.out' } }).to(h, { rotate: 45, duration: 0.5 }, 0).to(v, { rotate: -45, duration: 0.5 }, 0);
+            // OUVERT : transforme en X
+            spinTweenRef.current = gsap.timeline({ defaults: { ease: 'power4.out' } })
+                .to(h, { rotate: 45, y: 6, duration: 0.5 }, 0)
+                .to(v, { rotate: -45, y: -6, duration: 0.5 }, 0);
+            if (middle) {
+                gsap.to(middle, { opacity: 0, duration: 0.3 });
+            }
         } else {
-            spinTweenRef.current = gsap.timeline({ defaults: { ease: 'power3.inOut' } }).to(h, { rotate: 0, duration: 0.35 }, 0).to(v, { rotate: 90, duration: 0.35 }, 0).to(icon, { rotate: 0, duration: 0.001 }, 0);
+            // FERMÉ : revient à hamburger
+            spinTweenRef.current = gsap.timeline({ defaults: { ease: 'power3.inOut' } })
+                .to(h, { rotate: 0, y: 0, duration: 0.35 }, 0)
+                .to(v, { rotate: 0, y: 0, duration: 0.35 }, 0);
+            if (middle) {
+                gsap.to(middle, { opacity: 1, duration: 0.3 });
+            }
         }
     }, []);
 
@@ -340,33 +356,52 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                             aria-label="Ouvrir le panier"
                         >
                             <FaShoppingCart className="h-5 w-5" />
-                            {cartCount > 0 && (
+                            {localCartCount > 0 && ( // <-- UTILISE localCartCount
                                 <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold rounded-full min-w-[20px] h-5 px-1 flex items-center justify-center">
-                                    {cartCount > 99 ? '99+' : cartCount}
+                                    {localCartCount > 99 ? '99+' : localCartCount}
                                 </span>
                             )}
                         </button>
 
                         {/* MENU TOGGLE */}
+                        {/* MENU TOGGLE */}
                         <button
                             ref={toggleBtnRef}
-                            className="sm-toggle relative inline-flex items-center gap-[0.3rem] bg-transparent border-0 cursor-pointer font-medium leading-none overflow-visible pointer-events-auto transition-colors duration-300"
-                            style={{ color: '#FE652D' }}
+                            className="sm-toggle relative inline-flex items-center gap-3 bg-[#FE652D] px-4 py-2.5 rounded-full border-0 cursor-pointer font-medium leading-none overflow-visible pointer-events-auto transition-all duration-300  active:scale-95 "
                             aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
                             aria-expanded={open}
                             onClick={toggleMenu}
                             type="button"
                         >
-                            <span ref={textWrapRef} className="sm-toggle-textWrap relative inline-block h-[1em] overflow-hidden whitespace-nowrap min-w-[3rem]" aria-hidden="true">
+                            {/* TEXTE EN ORANGE */}
+                            <span ref={textWrapRef} className="sm-toggle-textWrap relative inline-block h-[1em] overflow-hidden whitespace-nowrap min-w-[3rem] text-[#FE652D] font-medium" aria-hidden="true">
                                 <span ref={textInnerRef} className="sm-toggle-textInner flex flex-col leading-none">
                                     {textLines.map((l, i) => (
                                         <span className="sm-toggle-line block h-[1em] leading-none" key={i}>{l}</span>
                                     ))}
                                 </span>
                             </span>
-                            <span ref={iconRef} className="sm-icon relative w-[14px] h-[14px] shrink-0 inline-flex items-center justify-center" aria-hidden="true">
-                                <span ref={plusHRef} className="sm-icon-line absolute left-1/2 top-1/2 w-full h-[2px] bg-current rounded-[2px] -translate-x-1/2 -translate-y-1/2" />
-                                <span ref={plusVRef} className="sm-icon-line absolute left-1/2 top-1/2 w-full h-[2px] bg-current rounded-[2px] -translate-x-1/2 -translate-y-1/2" />
+
+                            {/* HAMBURGER / CROIX en BLANC sur fond ORANGE */}
+                            <span ref={iconRef} className="sm-icon relative w-[18px] h-[14px] shrink-0 inline-flex flex-col  items-center justify-between" aria-hidden="true">
+                                {/* Barre 1 - Haut */}
+                                <span
+                                    ref={plusHRef}
+                                    className="absolute w-full h-[2.5px] bg-[#FE652D] rounded-[2px] transition-all duration-300 origin-center"
+                                    style={{ top: 0 }}
+                                />
+                                {/* Barre 2 - Milieu */}
+                                <span
+                                    className="absolute w-full h-[2.5px] bg-[#FE652D] rounded-[2px] transition-all duration-300"
+                                    style={{ top: '50%', transform: 'translateY(-50%)' }}
+                                    id="middle-bar"
+                                />
+                                {/* Barre 3 - Bas */}
+                                <span
+                                    ref={plusVRef}
+                                    className="absolute w-full h-[2.5px] bg-[#FE652D] rounded-[2px] transition-all duration-300 origin-center"
+                                    style={{ bottom: 0 }}
+                                />
                             </span>
                         </button>
                     </div>

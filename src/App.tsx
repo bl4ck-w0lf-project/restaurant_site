@@ -36,8 +36,8 @@ function App() {
 
   const handleClearCart = () => setCartItems([]);
 
-    // Calcul du nombre total d'articles (utilisé par les deux)
-const totalCartItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);  
+  // Calcul du nombre total d'articles (utilisé par les deux)
+  const totalCartItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
     <Router>
@@ -47,11 +47,12 @@ const totalCartItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
         cartCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
       />
 
-        <StaggeredMenu
-         className="block md:hidden"
-          cartCount={totalCartItems} // <-- MÊME COMPTEUR
-       
-      />
+      {/* <StaggeredMenu
+        className="block md:hidden"
+        key={totalCartItems}
+        cartCount={totalCartItems} 
+
+      /> */}
 
       {/*  SOLUTION RADICALE : Ce "pt-20" pousse le contenu sous la navbar fixe. Plus rien ne sera caché. */}
       <main className="min-h-screen flex flex-col">
@@ -59,7 +60,10 @@ const totalCartItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/menu" element={<Menu onAddToCart={handleAddToCart} />} />
+            <Route
+              path="/menu"
+              element={<Menu onAddToCart={handleAddToCart} onOpenCart={() => setIsCartOpen(true)} />}
+            />
             <Route path="/contact" element={<Contact />} />
             <Route path="/reservation" element={<Reservation />} />
             <Route path="*" element={<Error404 />} />
@@ -75,6 +79,7 @@ const totalCartItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
         onSearchChange={setSearchValue}
         items={MenuMeals}
         onAddToCart={handleAddToCart}
+        onOpenCart={() => setIsCartOpen(true)}
       />
 
       <CartDrawer

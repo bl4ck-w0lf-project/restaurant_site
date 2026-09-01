@@ -198,6 +198,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenCart, onOpenSearch, cartCount }) 
                             closeOnClickAway={true}
                             onOpenCart={onOpenCart}
                             onOpenSearch={onOpenSearch}
+                            cartCount={cartCount}
                         />
                     </div>
                 </div>

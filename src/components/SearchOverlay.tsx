@@ -11,6 +11,7 @@ interface SearchOverlayProps {
   onSearchChange: (value: string) => void;
   items: MenuItem[];
   onAddToCart: (item: MenuItem) => void;
+   onOpenCart?: () => void;
 }
 
 const SearchOverlay: React.FC<SearchOverlayProps> = ({
@@ -20,6 +21,7 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({
   onSearchChange,
   items,
   onAddToCart,
+   onOpenCart,
 }) => {
   const [addedItems, setAddedItems] = useState<Set<number>>(new Set());
   const inputRef = useRef<HTMLInputElement>(null);
@@ -72,8 +74,13 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({
         newSet.delete(item.id);
         return newSet;
       });
-    }, 2000);
+      // OUVRE LE PANIER
+      if (onOpenCart) {
+        onOpenCart();
+      }
+    }, 1000); // 1.5 secondes pour voir "Ajouté"
   };
+ 
 
   return (
     <AnimatePresence>

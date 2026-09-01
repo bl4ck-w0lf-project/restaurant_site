@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Mail } from 'lucide-react';
 import { FaInstagram, FaFacebook } from 'react-icons/fa';
@@ -66,8 +67,8 @@ export default function Footer() {
                         <ul className="space-y-4">
                             {navLinks.map((link) => (
                                 <li key={link.name}>
-                                    <a
-                                        href={link.path}
+                                    <Link
+                                        to={link.path}
                                         className="group flex items-center gap-2 text-stone-400 hover:text-[#FE652D] transition-all duration-300 text-sm font-light"
                                     >
                                         <span>{link.name}</span>
@@ -75,7 +76,7 @@ export default function Footer() {
                                             size={14}
                                             className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#FE652D]"
                                         />
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>

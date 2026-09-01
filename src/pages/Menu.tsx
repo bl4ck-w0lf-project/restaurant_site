@@ -7,6 +7,7 @@ import {
 import { MenuMeals } from '../data/MenuMeals';
 import type { MenuItem } from '../data/MenuMeals';
 import { FaShoppingCart } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom'; 
 
 // Configuration des catégories avec leurs icônes Lucide
 const CATEGORY_CONFIG = [
@@ -19,9 +20,10 @@ const CATEGORY_CONFIG = [
 
 interface MenuPageProps {
   onAddToCart: (item: MenuItem) => void;
+  onOpenCart?: () => void;
 }
 
-export default function MenuPage({ onAddToCart }: MenuPageProps) {
+export default function MenuPage({ onAddToCart, onOpenCart }: MenuPageProps) {
   const [activeCategory, setActiveCategory] = useState<string>('Toutes');
 
   // Filtrage dynamique des plats
@@ -168,6 +170,7 @@ export default function MenuPage({ onAddToCart }: MenuPageProps) {
                         meal={meal} 
                         index={index} 
                         onAdd={onAddToCart} 
+                         onOpenCart={onOpenCart} 
                       />
                     ))}
                   </motion.div>
@@ -200,10 +203,12 @@ interface MealCardProps {
   meal: MenuItem;
   index: number;
   onAdd: (meal: MenuItem) => void;
+  onOpenCart?: () => void;
 }
 
-const MealCard: React.FC<MealCardProps> = ({ meal, index, onAdd }) => {
+const MealCard: React.FC<MealCardProps> = ({ meal, index, onAdd, onOpenCart }) => {
   const [isAdded, setIsAdded] = useState(false);
+  const navigate = useNavigate(); ;
 
   const categoryLabel = meal.category === 'entree' ? 'Entrées' :
     meal.category === 'plat_principal' ? 'Plats' :
@@ -212,10 +217,16 @@ const MealCard: React.FC<MealCardProps> = ({ meal, index, onAdd }) => {
   const handleAddClick = () => {
     onAdd(meal);
     setIsAdded(true);
-    setTimeout(() => {
+     setTimeout(() => {
       setIsAdded(false);
-    }, 2000);
+      // OUVRE LE PANIER APRÈS AJOUT
+      if (onOpenCart) {
+        onOpenCart();
+      }
+    }, 1000);
+
   };
+  
 
   return (
     <motion.div
