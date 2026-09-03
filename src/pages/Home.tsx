@@ -31,7 +31,7 @@ const OrbitalHero = () => {
     // Fonction qui met à jour le rayon selon la taille de l'écran
     const updateRadius = () => {
       if (window.innerWidth < 360) {
-        setOrbitRadius(130); // Mobile : rayon serré mais visible
+        setOrbitRadius(100); // Mobile : rayon serré mais visible
       } else if (window.innerWidth < 640) {
         setOrbitRadius(180); // Tablette : rayon moyen (corrigé de 30 à 200)
       }
